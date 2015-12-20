@@ -15,7 +15,7 @@ class Store
   def get(resource, amount=1)
     norm_amount = enforce_amount(amount)
     in_stock = look_up(resource)
-    if in_stock > norm_amount
+    if in_stock >= norm_amount
       @storage[resource] = in_stock - norm_amount
       norm_amount
     else

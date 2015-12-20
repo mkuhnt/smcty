@@ -27,14 +27,21 @@ end
 #
 #   quit
 #
-#   store list              -> list the inventory of the store
-#   store put item amount
-#   store get item amount
+#   store                   -> list the inventory of the store
+#   store put #item #amount
+#   store get :item #amount
 #
 #   factory list            -> list the registered factories
-#   factory name            -> list the resources of the named factory
+#   factory #name           -> list the resources and the production of the named factory
 #
 #   resources               -> list all managed resources
+#
+#   project add #label [#resource:#amount]+
+#   project #label
+#
+#   produce #resource
+#
+#   next
 
 def process_resources(config)
   list_resources(config.resources)
@@ -53,16 +60,21 @@ def process_store(commands, config)
   elsif commands.size == 3
     resource = config.resource_by_name(commands[1])
     amount = commands[2].to_i
-
-    case commands[0].downcase
-    when "get"
-      puts "get #{commands[2]} units of #{commands[1]} from store"
-      puts config.store.get(resource, amount)
-    when "put"
-      puts "put #{commands[2]} units of #{commands[1]} to store"
-      puts config.store.put(resource, amount)
+    if resource && amount > 0
+      case commands[0].downcase
+      when "get"
+        puts "get #{commands[2]} units of #{commands[1]} from store"
+        result = config.store.get(resource, amount)
+        puts "got #{result} items resulting in stock of #{config.store.stock(resource)}"
+      when "put"
+        puts "put #{commands[2]} units of #{commands[1]} to store"
+        result = config.store.put(resource, amount)
+        puts "new stock is: #{config.store.stock(resource)}"
+      else
+        puts "operator on store was not recognized"
+      end
     else
-      puts "operator on store was not recognized"
+      puts "resource '#{commands[1]}' or amount '#{commands[2]}' not valid"
     end
   else
     puts "command not recognized"
