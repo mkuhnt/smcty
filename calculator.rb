@@ -4,9 +4,10 @@ require_relative "helpers"
 require_relative "structures"
 
 class Configuration
-  attr_reader :store
+  attr_reader :created_at, :store
 
   def initialize(store)
+    @created_at = Time.new
     @store = store
     @factories = {}
   end
@@ -21,6 +22,10 @@ class Configuration
       return resource if resource
     end
     nil
+  end
+
+  def to_s
+    "Configuration created at #{@created_at}"
   end
 
 end
@@ -106,3 +111,5 @@ def read_configuration(name, path)
     configuration
   end
 end
+
+c = read_configuration('test', 'configuration.json')

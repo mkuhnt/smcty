@@ -31,6 +31,18 @@ class Store
     @storage.keys.sort
   end
 
+  def total_stock
+    result = 0
+    @storage.values.each do |value|
+      result += value
+    end
+    result
+  end
+
+  def to_s
+    "Store '#{@name}' has a capacity of #{@capacity} and a total stock of #{total_stock}"
+  end
+
   private
 
   def enforce_amount(amount)
@@ -40,6 +52,7 @@ class Store
   def look_up(resource)
     @storage[resource] || 0
   end
+
 end
 
 class Resource
@@ -62,6 +75,19 @@ class Resource
     @dependencies[resource]
   end
 
+  def to_s
+    "Resource '#{@name}' with these dependencies: #{dependency_list}"
+  end
+
+  private
+
+  def dependency_list
+    items = []
+    @dependencies.keys.each do |resource|
+      items << "#{@resource.name}: #{@dependencies[resource]}"
+    end
+    items.join(", ")
+  end
 end
 
 class Factory
@@ -89,6 +115,10 @@ class Factory
 
   def resource_by_name(name)
     @resources[name]
+  end
+
+  def to_s
+    "Factory '#{@name}' with capacity of #{@capacity} is responsible for #{@resources.keys.join(", ")}"
   end
 
 end
