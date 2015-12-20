@@ -25,6 +25,14 @@ class Configuration
     nil
   end
 
+  def factories
+    @factories.keys.sort
+  end
+
+  def factory(name)
+    @factories[name]
+  end
+
   def to_s
     "Configuration created at #{@created_at}"
   end

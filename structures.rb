@@ -68,7 +68,7 @@ class Resource
   end
 
   def dependent_resources
-    @dependencies.keys.sort
+    @dependencies.keys
   end
 
   def dependent_resource_amount(resource)
@@ -84,7 +84,7 @@ class Resource
   def dependency_list
     items = []
     @dependencies.keys.each do |resource|
-      items << "#{@resource.name}: #{@dependencies[resource]}"
+      items << "#{resource.name}: #{@dependencies[resource]}"
     end
     items.join(", ")
   end
@@ -106,7 +106,7 @@ class Factory
   end
 
   def resources
-    @production_times.keys.sort
+    @production_times.keys
   end
 
   def production_time(resource)
