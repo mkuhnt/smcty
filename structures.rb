@@ -43,6 +43,14 @@ class Store
     "Store '#{@name}' has a capacity of #{@capacity} and a total stock of #{total_stock}"
   end
 
+  def to_hash
+    {
+      "name": @name,
+      "capacity": @capacity,
+      "stock": @storage.keys.map{|k| {"name": k, "amount": @storage[k]}}
+    }
+  end
+
   private
 
   def enforce_amount(amount)
@@ -77,6 +85,14 @@ class Resource
 
   def to_s
     "Resource '#{@name}' with these dependencies: #{dependency_list}"
+  end
+
+  def to_hash(time)
+    {
+      "name": @name,
+      "time": time,
+      "deps": @dependencies.keys.map{|r| {"name": r.name, "amount": @dependencies[r]}}
+    }
   end
 
   private
@@ -119,6 +135,14 @@ class Factory
 
   def to_s
     "Factory '#{@name}' with capacity of #{@capacity} is responsible for #{@resources.keys.join(", ")}"
+  end
+
+  def to_hash
+    {
+      "name": @name,
+      "capacity": @capacity,
+      "resources": @resources.values.map{|r| r.to_hash(@production_times[r])}
+    }
   end
 
 end

@@ -37,6 +37,13 @@ class Configuration
     "Configuration created at #{@created_at}"
   end
 
+  def to_hash
+    {
+      "store": @store.to_hash,
+      "factories": @factories.values.map{|f| f.to_hash}
+    }
+  end
+
 end
 
 def read_value(hash, key, force, default=nil)
@@ -47,7 +54,7 @@ def read_value(hash, key, force, default=nil)
   value || default
 end
 
-def read_configuration(name, path)
+def read_configuration(path)
   file = File.read(path)
   data_hash = JSON.parse(file)
 
@@ -121,4 +128,8 @@ def read_configuration(name, path)
   end
 end
 
-c = read_configuration('test', 'configuration.json')
+def write_configuration(configuration, path)
+  File.open(path,"w") do |f|
+    f.write(configuration.to_hash.to_json)
+  end
+end
