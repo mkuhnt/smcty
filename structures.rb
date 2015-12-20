@@ -28,7 +28,7 @@ class Store
   end
 
   def inventory
-    @storage.keys.sort
+    @storage.keys
   end
 
   def total_stock

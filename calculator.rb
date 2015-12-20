@@ -2,6 +2,7 @@ require 'json'
 
 require_relative "helpers"
 require_relative "structures"
+require_relative "output"
 
 class Configuration
   attr_reader :created_at, :store
