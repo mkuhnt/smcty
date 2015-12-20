@@ -7,9 +7,6 @@
         "name": "Lager-Stangen",
         "amount": 5
       },{
-        "name": "Bulldozer-Rad",
-        "amount": 3
-      },{
         "name": "Maßband",
         "amount": 2
       },{
@@ -26,7 +23,7 @@
         "amount": 2
       },{
         "name": "Bulldozer-Schaufel",
-        "amount": 4
+        "amount": 1
       },{
         "name": "Metall",
         "amount": 4
@@ -35,9 +32,6 @@
         "amount": 1
       },{
         "name": "Mineralstoff",
-        "amount": 3
-      },{
-        "name": "Bulldozer-Auspuff",
         "amount": 3
       },{
         "name": "Holz",
@@ -65,7 +59,7 @@
         "amount": 2
       },{
         "name": "Zucker und Gewürze",
-        "amount": 1
+        "amount": 5
       }
     ]
   },
