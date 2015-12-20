@@ -1,50 +1,12 @@
 require 'json'
 
 require_relative "helpers"
-require_relative "structures"
+require_relative "configuration"
+require_relative "project"
+require_relative "factory"
+require_relative "resource"
+require_relative "store"
 require_relative "output"
-
-class Configuration
-  attr_reader :created_at, :store
-
-  def initialize(store)
-    @created_at = Time.new
-    @store = store
-    @factories = {}
-  end
-
-  def register_factory(factory)
-    @factories[factory.name] = factory
-  end
-
-  def resource_by_name(resource_name)
-    @factories.values.each do |factory|
-      resource = factory.resource_by_name(resource_name)
-      return resource if resource
-    end
-    nil
-  end
-
-  def factories
-    @factories.keys.sort
-  end
-
-  def factory(name)
-    @factories[name]
-  end
-
-  def to_s
-    "Configuration created at #{@created_at}"
-  end
-
-  def to_hash
-    {
-      "store": @store.to_hash,
-      "factories": @factories.values.map{|f| f.to_hash}
-    }
-  end
-
-end
 
 def read_value(hash, key, force, default=nil)
   value = hash[key]
