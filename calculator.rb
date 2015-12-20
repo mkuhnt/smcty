@@ -79,9 +79,10 @@ def read_configuration(path)
       factory_resources = read_value(factory_hash, "resources", true)
       factory_resources.each do |resources_hash|
         resource_name = read_value(resources_hash, "name", true)
+        resource_description = read_value(resources_hash, "description", true)
         resource_time = read_value(resources_hash, "time", true)
 
-        resource = Resource.new(resource_name)
+        resource = Resource.new(resource_name, resource_description)
         factory.register_resource(resource, resource_time)
 
         resource_deps = read_value(resources_hash, "deps", false, [])
@@ -120,7 +121,7 @@ def read_configuration(path)
       resource_name = read_value(stock_hash, "name", true)
       resource_amount = read_value(stock_hash, "amount", true)
 
-      resource = configuration.resource_by_name(resource_name) || Resource.new(resource_name)
+      resource = configuration.resource_by_name(resource_name) || Resource.new(resource_name, "unmanaged")
       store.put(resource, resource_amount)
     end
 

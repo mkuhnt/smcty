@@ -64,10 +64,11 @@ class Store
 end
 
 class Resource
-  attr_reader :name
+  attr_reader :name, :description
 
-  def initialize(name)
+  def initialize(name, description)
     @name = name
+    @description = description
     @dependencies = {}
   end
 
@@ -84,12 +85,13 @@ class Resource
   end
 
   def to_s
-    "Resource '#{@name}' with these dependencies: #{dependency_list}"
+    "Resource '#{@name}' (#{@description}) with these dependencies: #{dependency_list}"
   end
 
   def to_hash(time)
     {
       "name": @name,
+      "description": @description,
       "time": time,
       "deps": @dependencies.keys.map{|r| {"name": r.name, "amount": @dependencies[r]}}
     }

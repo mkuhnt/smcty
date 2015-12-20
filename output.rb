@@ -5,7 +5,7 @@ def list_inventory(store)
   puts "Current inventory:"
   puts ""
   store.inventory.each do |item|
-    puts "\t#{item.name}: #{store.stock(item)} items"
+    puts "\t#{item.name} (#{item.description}): #{store.stock(item)} items"
   end
 end
 
@@ -16,7 +16,7 @@ def outline_factory(factory)
   puts "Available resources:"
   puts ""
   factory.resources.each do |resource|
-    puts "\t#{resource.to_s}"
+    puts "\t#{resource.to_s} (Time: #{natural_time(factory.production_time(resource))})"
   end
 end
 

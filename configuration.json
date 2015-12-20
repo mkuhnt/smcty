@@ -5,18 +5,18 @@
     "stock": [
       {
         "name": "Lager-Stangen",
-        "amount": 6
+        "amount": 5
       },{
-        "name": "Maßband",
+        "name": "measure",
         "amount": 2
       },{
-        "name": "Textilien",
+        "name": "textile",
         "amount": 4
       },{
-        "name": "Samen",
+        "name": "seed",
         "amount": 3
       },{
-        "name": "Bretter",
+        "name": "boards",
         "amount": 1
       },{
         "name": "Tauchermaske",
@@ -25,41 +25,44 @@
         "name": "Bulldozer-Schaufel",
         "amount": 1
       },{
-        "name": "Metall",
+        "name": "metal",
         "amount": 4
       },{
-        "name": "Schaufel",
+        "name": "shovel",
         "amount": 1
       },{
-        "name": "Mineralstoff",
-        "amount": 3
-      },{
-        "name": "Holz",
+        "name": "sugar",
         "amount": 5
       },{
-        "name": "Gemüse",
+        "name": "minerals",
+        "amount": 3
+      },{
+        "name": "wood",
+        "amount": 5
+      },{
+        "name": "veg",
         "amount": 2
       },{
         "name": "Lager-Kamera",
         "amount": 3
       },{
-        "name": "Hammer",
-        "amount": 3
-      },{
-        "name": "Chemikalien",
+        "name": "glass",
         "amount": 1
       },{
-        "name": "Plastik",
+        "name": "hammer",
+        "amount": 3
+      },{
+        "name": "chemicals",
+        "amount": 1
+      },{
+        "name": "plastic",
         "amount": 4
       },{
-        "name": "Nägel",
+        "name": "nails",
         "amount": 2
       },{
         "name": "Rettungsring",
         "amount": 2
-      },{
-        "name": "Zucker und Gewürze",
-        "amount": 5
       }
     ]
   },
@@ -69,31 +72,40 @@
       "capacity": 22,
       "resources": [
         {
-          "name": "Metall",
+          "name": "metal",
+          "description": "Metall",
           "time": 60
         },{
-          "name": "Textilien",
+          "name": "textile",
+          "description": "Textilien",
           "time": 10800
         },{
-          "name": "Holz",
+          "name": "wood",
+          "description": "Holz",
           "time": 180
         },{
-          "name": "Zucker und Gewürze",
+          "name": "sugar",
+          "description": "Zucker und Gewürze",
           "time": 14400
         },{
-          "name": "Glas",
+          "name": "glass",
+          "description": "Glas",
           "time": 18000
         },{
-          "name": "Plastik",
+          "name": "plastic",
+          "description": "Plastik",
           "time": 540
         },{
-          "name": "Samen",
+          "name": "seed",
+          "description": "Samen",
           "time": 1200
         },{
-          "name": "Mineralstoff",
+          "name": "minerals",
+          "description": "Mineralstoff",
           "time": 1800
         },{
-          "name": "Chemikalien",
+          "name": "chemicals",
+          "description": "Chemikalien",
           "time": 7200
         }
 
@@ -103,68 +115,73 @@
       "capacity": 5,
       "resources": [
         {
-          "name": "Hammer",
+          "name": "hammer",
+          "description": "Hammer",
           "time": 756,
           "deps": [
             {
-              "name": "Metall",
+              "name": "metal",
               "amount": 1
             },{
-              "name": "Holz",
+              "name": "wood",
               "amount": 1
             }
           ]
         },{
-          "name": "Maßband",
+          "name": "measure",
+          "description": "Maßband",
           "time": 1080,
           "deps": [
             {
-              "name": "Metall",
+              "name": "metal",
               "amount": 1
             },{
-              "name": "Plastik",
+              "name": "plastic",
               "amount": 1
             }
           ]
         },{
-          "name": "Schaufel",
+          "name": "shovel",
+          "description": "Schaufel",
           "time": 1620,
           "deps": [
             {
-              "name": "Metall",
+              "name": "metal",
               "amount": 1
             },{
-              "name": "Holz",
+              "name": "wood",
               "amount": 1
             },{
-              "name": "Plastik",
+              "name": "plastic",
               "amount": 1
             }
           ]
         },{
-          "name": "Kochutensiien",
+          "name": "cooking",
+          "description": "Kochutensiien",
           "time": 2430,
           "deps": [
             {
-              "name": "Metall",
+              "name": "metal",
               "amount": 2
             },{
-              "name": "Holz",
+              "name": "wood",
               "amount": 2
             },{
-              "name": "Plastik",
+              "name": "plastic",
               "amount": 2
             }
           ]
         },{
-          "name": "Leiter",
+          "name": "ladder",
+          "description": "Leiter",
           "time": 3240,
           "deps": [
             {
-              "name": "Bretter",
+              "name": "boards",
               "amount": 2
             },{
-              "name": "Metall",
+              "name": "metal",
               "amount": 2
             }
           ]
@@ -175,68 +192,74 @@
       "capacity": 6,
       "resources": [
         {
-          "name": "Nägel",
+          "name": "nails",
+          "description": "Nägel",
           "time": 270,
           "deps": [
             {
-              "name": "Metall",
+              "name": "metal",
               "amount": 2
             }
           ]
         },{
-          "name": "Bretter",
+          "name": "boards",
+          "description": "Bretter",
           "time": 1620,
           "deps": [
             {
-              "name": "Holz",
+              "name": "wood",
               "amount": 2
             }
           ]
         },{
-          "name": "Backsteine",
+          "name": "brick",
+          "description": "Backsteine",
           "time": 1080,
           "deps": [
             {
-              "name": "Mineralstoff",
+              "name": "minerals",
               "amount": 2
             }
           ]
         },{
-          "name": "Zement",
+          "name": "cement",
+          "description": "Zement",
           "time": 2700,
           "deps": [
             {
-              "name": "Mineralstoff",
+              "name": "minerals",
               "amount": 2
             }, {
-              "name": "Chemikalien",
+              "name": "chemicals",
               "amount": 1
             }
           ]
         },{
-          "name": "Kleber",
+          "name": "glue",
+          "description": "Kleber",
           "time": 3240,
           "deps": [
             {
-              "name": "Plastik",
+              "name": "plastic",
               "amount": 1
             },{
-              "name": "Chemikalien",
+              "name": "chemicals",
               "amount": 2
             }
           ]
         },{
-          "name": "Farbe",
+          "name": "paint",
+          "description": "Farbe",
           "time": 3240,
           "deps": [
             {
-              "name": "Metall",
+              "name": "metal",
               "amount": 2
             },{
-              "name": "Mineralstoff",
+              "name": "minerals",
               "amount": 1
             },{
-              "name": "Chemikalien",
+              "name": "chemicals",
               "amount": 2
             }
           ]
@@ -247,35 +270,38 @@
       "capacity": 3,
       "resources": [
         {
-          "name": "Gemüse",
+          "name": "veg",
+          "description": "Gemüse",
           "time": 1200,
           "deps": [
             {
-              "name": "Samen",
+              "name": "seed",
               "amount": 2
             }
           ]
         },{
-          "name": "Mehlbeutel",
+          "name": "flour",
+          "description": "Mehlbeutel",
           "time": 1800,
           "deps": [
             {
-              "name": "Samen",
+              "name": "seed",
               "amount": 2
             },{
-              "name": "Textilien",
+              "name": "textile",
               "amount": 2
             }
           ]
         },{
-          "name": "Obst & Beeren",
+          "name": "fruits",
+          "description": "Obst & Beeren",
           "time": 5400,
           "deps": [
             {
-              "name": "Samen",
+              "name": "seed",
               "amount": 2
             },{
-              "name": "Schösslinge",
+              "name": "tiller",
               "amount": 1
             }
           ]
@@ -286,32 +312,34 @@
       "capacity": 3,
       "resources": [
         {
-          "name": "Stühle",
+          "name": "chair",
+          "description": "Stühle",
           "time": 1200,
           "deps": [
             {
-              "name": "Holz",
+              "name": "wood",
               "amount": 2
             },{
-              "name": "Nägel",
+              "name": "nails",
               "amount": 1
             },{
-              "name": "Hammer",
+              "name": "hammer",
               "amount": 1
             }
           ]
         },{
-          "name": "Tische",
+          "name": "desk",
+          "description": "Tische",
           "time": 1800,
           "deps": [
             {
-              "name": "Bretter",
+              "name": "boards",
               "amount": 1
             },{
-              "name": "Nägel",
+              "name": "nails",
               "amount": 2
             },{
-              "name": "Hammer",
+              "name": "hammer",
               "amount": 1
             }
           ]
@@ -322,26 +350,28 @@
       "capacity": 2,
       "resources": [
         {
-          "name": "Gras",
+          "name": "grass",
+          "description": "Gras",
           "time": 1800,
           "deps": [
             {
-              "name": "Samen",
+              "name": "seed",
               "amount": 1
             },{
-              "name": "Schaufel",
+              "name": "shovel",
               "amount": 1
             }
           ]
         },{
-          "name": "Schösslinge",
+          "name": "tiller",
+          "description": "Schösslinge",
           "time": 5400,
           "deps": [
             {
-              "name": "Samen",
+              "name": "seed",
               "amount": 2
             },{
-              "name": "Schaufel",
+              "name": "shovel",
               "amount": 1
             }
           ]
@@ -352,26 +382,28 @@
       "capacity": 2,
       "resources": [
         {
-          "name": "Donuts",
+          "name": "donuts",
+          "description": "Donuts",
           "time": 2700,
           "deps": [
             {
-              "name": "Mehlbeutel",
+              "name": "flour",
               "amount": 1
             },{
-              "name": "Zucker und Gewürze",
+              "name": "sugar",
               "amount": 1
             }
           ]
         },{
-          "name": "Gemüse Smoothie",
+          "name": "smoothie",
+          "description": "Gemüse Smoothie",
           "time": 1800,
           "deps": [
             {
-              "name": "Gemüse",
+              "name": "veg",
               "amount": 1
             },{
-              "name": "Obst & Beeren",
+              "name": "fruits",
               "amount": 1
             }
           ]
@@ -382,14 +414,15 @@
       "capacity": 2,
       "resources": [
         {
-          "name": "Hut",
+          "name": "hat",
+          "description": "Hut",
           "time": 3600,
           "deps": [
             {
-              "name": "Textilien",
+              "name": "textile",
               "amount": 2
             },{
-              "name": "Maßband",
+              "name": "measure",
               "amount": 1
             }
           ]
