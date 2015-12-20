@@ -19,6 +19,14 @@ class Configuration
     nil
   end
 
+  def resources
+    result = []
+    @factories.values.each do |f|
+      result += f.resources
+    end
+    result
+  end
+
   def factory_for(resource)
     @factories.values.each do |factory|
       resource = factory.resource_by_name(resource_name)

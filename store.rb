@@ -47,7 +47,7 @@ class Store
     {
       "name": @name,
       "capacity": @capacity,
-      "stock": @storage.keys.map{|k| {"name": k, "amount": @storage[k]}}
+      "stock": @storage.keys.map{|k| {"name": k.name, "amount": @storage[k]}}
     }
   end
 

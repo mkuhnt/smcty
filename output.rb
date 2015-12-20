@@ -9,7 +9,25 @@ def list_inventory(store)
   end
 end
 
-def outline_factory(factory)
+def list_resources(resource_list)
+  puts "-------------------------------------------------------------------"
+  puts "Registered Resources:"
+  puts ""
+  resource_list.each do |r|
+    puts "\t#{r.to_s}"
+  end
+end
+
+def list_factories(factory_list)
+  puts "-------------------------------------------------------------------"
+  puts "Registered Factories:"
+  puts ""
+  factory_list.each do |f|
+    puts "\t#{f.to_s}"
+  end
+end
+
+def list_factory(factory)
   puts "-------------------------------------------------------------------"
   puts factory.to_s
   puts "-------------------------------------------------------------------"
@@ -20,7 +38,7 @@ def outline_factory(factory)
   end
 end
 
-def outline_configuration(configuration)
+def list_configuration(configuration)
   puts "==================================================================="
   puts "Configuration created at: #{configuration.created_at}"
   puts "==================================================================="
