@@ -1,9 +1,75 @@
 {
-  "store-capacity": 70,
+  "store": {
+    "name": "Stadtlager",
+    "capacity": 70,
+    "stock": [
+      {
+        "name": "Lager-Stangen",
+        "amount": 5
+      },{
+        "name": "Bulldozer-Rad",
+        "amount": 3
+      },{
+        "name": "Maßband",
+        "amount": 2
+      },{
+        "name": "Textilien",
+        "amount": 2
+      },{
+        "name": "Samen",
+        "amount": 3
+      },{
+        "name": "Bretter",
+        "amount": 1
+      },{
+        "name": "Tauchermaske",
+        "amount": 2
+      },{
+        "name": "Bulldozer-Schaufel",
+        "amount": 4
+      },{
+        "name": "Metall",
+        "amount": 4
+      },{
+        "name": "Schaufel",
+        "amount": 1
+      },{
+        "name": "Mineralstoff",
+        "amount": 3
+      },{
+        "name": "Bulldozer-Auspuff",
+        "amount": 3
+      },{
+        "name": "Holz",
+        "amount": 5
+      },{
+        "name": "Gemüse",
+        "amount": 3
+      },{
+        "name": "Lager-Kamera",
+        "amount": 3
+      },{
+        "name": "Hammer",
+        "amount": 3
+      },{
+        "name": "Chemikalien",
+        "amount": 1
+      },{
+        "name": "Plastik",
+        "amount": 4
+      },{
+        "name": "Nägel",
+        "amount": 2
+      },{
+        "name": "Rettungsring",
+        "amount": 2
+      }
+    ]
+  },
   "factories": [
     {
       "name": "Fabrik",
-      "capacity": 15,
+      "capacity": 22,
       "resources": [
         {
           "name": "Metall",
@@ -37,7 +103,7 @@
       ]
     },{
       "name": "Werkzeugladen",
-      "capacity": 2,
+      "capacity": 5,
       "resources": [
         {
           "name": "Hammer",
@@ -109,7 +175,7 @@
       ]
     },{
       "name": "Baustoffhandel",
-      "capacity": 2,
+      "capacity": 6,
       "resources": [
         {
           "name": "Nägel",
@@ -181,7 +247,7 @@
       ]
     },{
       "name": "Bauernmarkt",
-      "capacity": 2,
+      "capacity": 3,
       "resources": [
         {
           "name": "Gemüse",
@@ -220,7 +286,7 @@
       ]
     },{
       "name": "Möbelladen",
-      "capacity": 2,
+      "capacity": 3,
       "resources": [
         {
           "name": "Stühle",

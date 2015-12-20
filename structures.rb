@@ -1,7 +1,8 @@
 class Store
-  attr_reader :capacity
+  attr_reader :name, :capacity
 
-  def initialize(capacity)
+  def initialize(name, capacity)
+    @name = name
     @capacity = capacity
     @storage = {}
   end

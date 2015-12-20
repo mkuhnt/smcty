@@ -4,11 +4,10 @@ require_relative "helpers"
 require_relative "structures"
 
 class Configuration
-  attr_reader :name
+  attr_reader :store
 
-  def initialize(name, capacity)
-    @name = name
-    @store = Store.new(capacity)
+  def initialize(store)
+    @store = store
     @factories = {}
   end
 
@@ -39,8 +38,12 @@ def read_configuration(name, path)
   data_hash = JSON.parse(file)
 
   if (data_hash && data_hash != {})
-    store_capacity = read_value(data_hash, "store-capacity", true)
-    configuration = Configuration.new(name, store_capacity)
+    store_hash = read_value(data_hash, "store", true)
+    store_name = read_value(store_hash, "name", true)
+    store_capacity = read_value(store_hash, "capacity", true)
+    store = Store.new(store_name, store_capacity)
+
+    configuration = Configuration.new(store)
 
     deferred_dependencies = []
 
@@ -89,6 +92,15 @@ def read_configuration(name, path)
       end
 
       resource.register_dependency(dependent_resource, amount)
+    end
+
+    # post process stock of store
+    read_value(store_hash, "stock", false, []).each do |stock_hash|
+      resource_name = read_value(stock_hash, "name", true)
+      resource_amount = read_value(stock_hash, "amount", true)
+
+      resource = configuration.resource_by_name(resource_name) || Resource.new(resource_name)
+      store.put(resource, resource_amount)
     end
 
     configuration
