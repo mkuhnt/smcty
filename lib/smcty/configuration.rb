@@ -49,8 +49,8 @@ class Configuration
 
   def to_hash
     {
-      "store": @store.to_hash,
-      "factories": @factories.values.map{|f| f.to_hash}
+      "store" => @store.to_hash,
+      "factories" => @factories.values.map{|f| f.to_hash}
     }
   end
 

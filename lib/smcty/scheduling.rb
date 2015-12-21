@@ -9,7 +9,7 @@
 #   j2 - resource, amount, project
 #
 
-class Scheduling
+class Smcty::Scheduling
 
   def initialize
     @jobs = []
@@ -42,7 +42,7 @@ class Scheduling
       precond_jobs = []
       job.dependent_resources.each do |dr|
         @jobs.select{|j| j.project == job.project && j.allocated?}.each do |aj|
-          
+
 
         end
       end
@@ -55,13 +55,13 @@ class Scheduling
         # create production task
 
       end
-      
+
     end
   end
 
 end
 
-class Job
+class Smcty::Job
   attr_reader :resource, :amount, :project, :allocation
 
   def initialize(resource, amount, project)

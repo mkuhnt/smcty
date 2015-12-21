@@ -45,9 +45,9 @@ class Store
 
   def to_hash
     {
-      "name": @name,
-      "capacity": @capacity,
-      "stock": @storage.keys.map{|k| {"name": k.name, "amount": @storage[k]}}
+      "name" => @name,
+      "capacity" => @capacity,
+      "stock" => @storage.keys.map{|k| {"name" => k.name, "amount" => @storage[k]}}
     }
   end
 

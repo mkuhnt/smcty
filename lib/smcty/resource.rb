@@ -25,10 +25,10 @@ class Resource
 
   def to_hash(time)
     {
-      "name": @name,
-      "description": @description,
-      "time": time,
-      "deps": @dependencies.keys.map{|r| {"name": r.name, "amount": @dependencies[r]}}
+      "name" => @name,
+      "description" => @description,
+      "time" => time,
+      "deps" => @dependencies.keys.map{|r| {"name" => r.name, "amount" => @dependencies[r]}}
     }
   end
 

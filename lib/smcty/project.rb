@@ -1,4 +1,4 @@
-class Project
+class Smcty::Project
   attr_reader :label
 
   def initialize(label)
