@@ -1,59 +1,21 @@
-class Requirement
-  attr_reader :resource, :amount
-
-  def initialize(resource, amount)
-    @resource = resource
-    @amount = amount > 0 ? amount : 0
-  end
-end
-
 class Project
-  attr_reader :created_at, :description, :requirements
+  attr_reader :label
 
-  def initialize(configuration, description, requirements)
-    @created_at = Time.now
-    @description = description
-    @config = configuration
-    @steps = []
-    requirements.each do |requirement|
-      @steps << Step.new(self, resource)
-    end
+  def initialize(label)
+    @label = label
+    @requirements = {}
   end
 
-  def finished?
-    result = false
-    @steps.each do |step|
-      result = step.finished?
-      break if result
-    end
-    result
+  def resources
+    @requirements.keys
   end
 
-  def factory_for(resource)
-    @config.factory_for(resource)
+  def amount(resource)
+    @requirements[resource]
   end
 
-end
-
-class Step
-  attr_reader :resource, :production
-
-  def initialize(project, resource)
-    @project = project
-    @resource = resource
-    @production = nil
-  end
-
-  def start_production
-    @production = @project.factory_for(@resource).produce(@resource)
-  end
-
-  def running?
-    @production != nil && !@production.finished?
-  end
-
-  def finished?
-    @production != nil && @production.finished?
+  def add_requirement(resource, amount)
+    @requirements[resource] = amount
   end
 
 end

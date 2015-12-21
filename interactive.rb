@@ -17,6 +17,8 @@ def dispatch(input, config)
     continue = process_quit(config)
   when "resources"
     continue = process_resources(config)
+  when "project"
+    continue = process_projects(commands[1..-1], config)
   else
     puts "unknown command: #{input}"
   end
@@ -42,6 +44,12 @@ end
 #   produce #resource
 #
 #   next
+
+def process_projects(commands, config)
+  # project object {label, [{resource, amount}]}
+  # -> scheduling.register_project(...)
+  true
+end
 
 def process_resources(config)
   list_resources(config.resources)
@@ -106,7 +114,6 @@ end
 
 configuration = read_configuration(ARGV[0])
 puts "Starting Simcity Production Assistent"
-puts "  loaded configuration from #{ARGV[0]}"
-
+puts "> loaded configuration from #{ARGV[0]}"
 
 command_prompt!(configuration)
