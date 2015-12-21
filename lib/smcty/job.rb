@@ -1,10 +1,9 @@
 module Smcty
   class Job
-    attr_reader :resource, :amount, :project, :allocation
+    attr_reader :resource, :project, :allocation
 
-    def initialize(resource, amount, project)
+    def initialize(resource, project)
       @resource = resource
-      @amount = amount
       @project = project
       @used = false
     end
