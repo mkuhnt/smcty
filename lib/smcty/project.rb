@@ -1,9 +1,9 @@
 module Smcty
   class Project
-    attr_reader :label
+    attr_reader :name
 
-    def initialize(label)
-      @label = label
+    def initialize(name)
+      @name = name
       @requirements = {}
     end
 
