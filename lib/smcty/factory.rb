@@ -27,31 +27,6 @@ module Smcty
       @resources[name]
     end
 
-    def produce(resource)
-      check_resource(resource)
-      if @capacity = @productions.size
-        raise "Factory '#{@name}' is currently blocked with productions."
-      end
-
-      production = Production.new(resource)
-      @productions << production
-
-      production
-    end
-
-    def ship(resource)
-      check_resource(resource)
-
-      result = nil
-      @productions.each_with_index do |idx, production|
-        if production.resource == resource && production.finished?
-          result = production
-          @productions.delete_at(idx)
-        end
-      end
-      result
-    end
-
     def to_s
       "Factory '#{@name}' with capacity of #{@capacity} is responsible for #{@resources.keys.join(", ")}"
     end
@@ -64,12 +39,5 @@ module Smcty
       }
     end
 
-    private
-
-    def check_resource(resource)
-      unless (@production_times[resource])
-        raise "Factory '#{@name}' cannot produce '#{resource.name}'"
-      end
-    end
   end
 end
