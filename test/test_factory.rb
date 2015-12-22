@@ -1,3 +1,4 @@
+require 'timecop'
 require 'minitest/autorun'
 require 'smcty/factory'
 

@@ -12,7 +12,7 @@
 module Smcty
   class Scheduling
 
-    def initialize
+    def initialize(configuration)
       @jobs = []
       @allocations = {}
     end

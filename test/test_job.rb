@@ -1,5 +1,5 @@
+require 'timecop'
 require 'minitest/autorun'
-
 require 'smcty/job'
 require 'smcty/resource'
 require 'smcty/store'
