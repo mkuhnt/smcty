@@ -54,6 +54,16 @@ module Smcty
         @store.free_capacity.must_equal 8
         @store.stock(@resource_1).must_equal 2
       end
+
+      it "checks if an allocation is valid" do
+        @store.put(@resource_1, 5)
+        allocation = @store.allocate(@resource_1, 3)
+
+        @store.valid?(allocation).must_equal true
+
+        @store.get(allocation)
+        @store.valid?(allocation).must_equal false
+      end
     end
 
     describe "capacity" do

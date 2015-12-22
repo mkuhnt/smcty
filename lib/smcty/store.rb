@@ -53,7 +53,7 @@ module Smcty
     def allocate(resource, _amount)
       amount = pop(resource, _amount)
       if amount > 0
-        allocation = Allocation.new(resource, amount)
+        allocation = Allocation.new(self, resource, amount)
         @allocations.add(allocation)
         allocation
       else
@@ -64,6 +64,10 @@ module Smcty
     def free(allocation)
       put(allocation.resource, allocation.amount)
       @allocations.delete(allocation)
+    end
+
+    def valid?(allocation)
+      @allocations.include?(allocation)
     end
 
     def inventory
