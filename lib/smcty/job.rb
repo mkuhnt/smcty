@@ -8,6 +8,10 @@ module Smcty
       @used = false
     end
 
+    def new?
+      true
+    end
+
     def allocate(allocation)
       @allocation = allocation
     end
