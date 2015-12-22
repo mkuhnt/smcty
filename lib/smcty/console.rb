@@ -1,6 +1,9 @@
 require 'smcty/configurator'
 require 'smcty/output'
 require 'smcty/helpers'
+require 'smcty/production'
+require 'smcty/project'
+require 'smcty/scheduling'
 
 module Smcty
   class Console
@@ -10,7 +13,9 @@ module Smcty
     def initialize(input_stream, config_path)
       @in = input_stream
       @configurator = Configurator.new(config_path)
-      @configuraton = @configurator.configuration
+      @configuration = @configurator.configuration
+      @productions = {}
+      @scheduler = Scheduling.new(@configuration)
     end
 
     def prompt!
@@ -27,9 +32,8 @@ module Smcty
     #
     #   store                   -> list the inventory of the store
     #   store put #item #amount
-    #   store get :item #amount
     #
-    #   factory list            -> list the registered factories
+    #   factory                 -> list the registered factories
     #   factory #name           -> list the resources and the production of the named factory
     #
     #   resources               -> list all managed resources
@@ -38,6 +42,8 @@ module Smcty
     #   project #label
     #
     #   produce #resource
+    #
+    #   pick #production-number
     #
     #   next
     #
@@ -55,45 +61,129 @@ module Smcty
         continue = process_resources
       when "project"
         continue = process_projects(commands[1..-1])
+      when "produce"
+        continue = process_production(commands[1..-1])
+      when "pick"
+        continue = process_pick(commands[1..-1])
+      when "next"
+        continue = process_next
       else
         puts "unknown command: #{input}"
       end
       return continue
     end
 
+    def process_next
+      puts "DO > #{@scheduler.next}"
+      true
+    end
+
     def process_projects(commands)
-      # project object {label, [{resource, amount}]}
-      # -> scheduling.register_project(...)
+      if commands.size == 1
+        puts "print the project"
+      elsif commands.size > 2
+        unless commands[0] == "add"
+          puts "unknow command #{commands[0]} for project is not known"
+          return true
+        end
+        project = Project.new(commands[1])
+        requirements = commands[2..-1]
+        requirements.each do |r|
+          items = r.split(":")
+          r_name = items[0]
+          amount = items[1].to_i
+          resource = @configuration.resource_by_name(r_name)
+          unless resource
+            puts "the resource #{resource_name} is not known"
+            return true
+          end
+          project.add_requirement(resource, amount)
+          @scheduler.plan_project(project)
+          puts "planned the project"
+        end
+      else
+        puts "not enough parameters for project command"
+      end
+      true
+    end
+
+    def process_pick(commands)
+      if commands.size != 1
+        puts "please pass the number of production to pick"
+      else
+        number = commands[0].to_i
+        production = @productions[number]
+        unless production
+          puts "the production number #{commands[0]} is not known"
+          return true
+        end
+        unless production.finished?
+          puts "the production is not finished yet"
+          return true
+        end
+        if @configuration.store.free_capacity > 0
+          factory = @configuration.factory_for(production.resource)
+          factory.pick(production)
+          @productions.delete(number)
+          @configuration.store.put(production.resource, 1)
+          puts "the item was stored"
+        else
+          puts "no storage left"
+        end
+      end
+      true
+    end
+
+    def process_production(commands)
+      if commands.size != 1
+        puts "please name the resource to produce"
+      else
+        resource_name = commands[0]
+        resource = @configuration.resource_by_name(resource_name)
+        unless resource
+          puts "the resource #{resource_name} is not known"
+          return true
+        end
+        factory = @configuration.factory_for(resource)
+        allocations = []
+        resource.dependent_resources.each do |r|
+          allocation = @configuration.store.allocate(r, resource.dependent_resource_amount(r))
+          unless allocation
+            puts "Not enough of #{r.name} to produce #{resource_name}"
+            return true
+          end
+          allocations << allocation
+        end
+        production = factory.produce(resource, allocations)
+        @productions[production.object_id] = production
+        puts "Now producing: #{production.object_id} in factory: #{factory.name}"
+      end
       true
     end
 
     def process_resources
-      list_resources(@configuraton.resources)
+      list_resources(@configuration.resources)
       true
     end
 
     def process_quit
-      puts "Storing configuraton back to file and exit."
+      puts "Storing configuration back to file and exit."
       @configurator.save
       false
     end
 
     def process_store(commands)
       if commands.size == 0
-        list_inventory(@configuraton.store)
+        list_inventory(@configuration.store)
       elsif commands.size == 3
-        resource = @configuraton.resource_by_name(commands[1])
+        resource = @configuration.resource_by_name(commands[1])
         amount = commands[2].to_i
         if resource && amount > 0
           case commands[0].downcase
-          when "get"
-            puts "get #{commands[2]} units of #{commands[1]} from store"
-            result = @configuraton.store.get(resource, amount)
-            puts "got #{result} items resulting in stock of #{@configuraton.store.stock(resource)}"
           when "put"
             puts "put #{commands[2]} units of #{commands[1]} to store"
-            result = @configuraton.store.put(resource, amount)
-            puts "new stock is: #{@configuraton.store.stock(resource)}"
+            result = @configuration.store.put(resource, amount)
+            puts "new stock is: #{@configuration.store.stock(resource)}"
           else
             puts "operator on store was not recognized"
           end
@@ -108,9 +198,9 @@ module Smcty
 
     def process_factory(commands)
       if commands.size == 0
-        list_factories(@configuraton.factories)
+        list_factories(@configuration.factories)
       else
-        factory = @configuraton.factory(commands[0])
+        factory = @configuration.factory(commands[0])
         if factory
           list_factory(factory)
         else

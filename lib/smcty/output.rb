@@ -18,6 +18,15 @@ def list_resources(resource_list)
   end
 end
 
+def list_project(project)
+  puts "-------------------------------------------------------------------"
+  puts "Project #{project.name}"
+  puts ""
+  project.resources.each do |r|
+    puts "\t#{r.name} - #{project.amount(r)}"
+  end
+end
+
 def list_factories(factory_list)
   puts "-------------------------------------------------------------------"
   puts "Registered Factories:"
@@ -35,6 +44,16 @@ def list_factory(factory)
   puts ""
   factory.resources.each do |resource|
     puts "\t#{resource.to_s} (Time: #{natural_time(factory.production_time(resource))})"
+  end
+  puts ""
+  puts "Running production"
+  factory.productions.each do |production|
+    line = "\t#{production.object_id} -> #{production.resource.name}"
+    line += " / started at: #{production.start_time}"
+    line += " / duration: #{production.duration}"
+    line += " / delivery at: #{production.start_time + production.duration}"
+    line + " / finished: #{production.finished?}"
+    puts line
   end
 end
 

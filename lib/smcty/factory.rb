@@ -1,6 +1,6 @@
 module Smcty
   class Factory
-    attr_reader :name, :capacity
+    attr_reader :name, :capacity, :productions
 
     def initialize(name, capacity)
       @name = name
