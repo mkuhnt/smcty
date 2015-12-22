@@ -10,6 +10,10 @@ module Smcty
       @productions = []
     end
 
+    def free_capacity
+      capacity - @productions.size
+    end
+
     def register_resource(resource, production_time)
       @production_times[resource] = production_time
       @resources[resource.name] = resource
@@ -27,6 +31,24 @@ module Smcty
       @resources[name]
     end
 
+    def produce(resource, allocations=[])
+      time = @production_times[resource]
+      if time && free_capacity > 0 && Factory.check_preconditions(resource, allocations)
+        allocations.each{ |a| a.get }
+        production = Production.new(self, resource, time)
+        @productions << production
+        return production
+      else
+        nil
+      end
+    end
+
+    def pick(production)
+      if production && production.finished?
+        @productions.delete(production)
+      end
+    end
+
     def to_s
       "Factory '#{@name}' with capacity of #{@capacity} is responsible for #{@resources.keys.join(", ")}"
     end
@@ -37,6 +59,30 @@ module Smcty
         "capacity" => @capacity,
         "resources" => @resources.values.map{|r| r.to_hash(@production_times[r])}
       }
+    end
+
+    private
+
+    def self.check_preconditions(resource, allocations)
+      allocated_resources = {}
+      allocations.each do |a|
+        if a.valid?
+          depot = allocated_resources[a.resource] || {amount: 0}
+          depot[:amount] += a.amount
+          allocated_resources[a.resource] = depot
+        end
+      end
+
+      resource.dependent_resources.each do |dr|
+        required_amount = resource.dependent_resource_amount(dr)
+        depot = allocated_resources[dr]
+        if depot && depot[:amount] >= required_amount
+          depot[:amount] -= required_amount
+        else
+          return false
+        end
+      end
+      return true
     end
 
   end
