@@ -10,9 +10,11 @@ module Smcty
 
     def allocate(allocation)
       @allocation = allocation
+      @production = nil
     end
 
     def produce(production)
+      @allocation = nil
       @production = production
     end
 

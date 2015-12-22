@@ -28,7 +28,7 @@ module Smcty
         @job.in_production?.must_equal true
       end
 
-      it "is 'ready' if a production is assigned but it is ready" do
+      it "is 'ready' if a production is assigned and it is ready" do
         @job.produce(Production.new(@resource, 60))
 
         Timecop.freeze(Time.now + 70) do

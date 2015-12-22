@@ -12,7 +12,8 @@ module Smcty
     #
     # Resources
     #   r1 -> r2:1, r3:2
-    #   t2 -> t4:1
+    #   r2 -> r4:1
+    #   r3 -> r4:1
     #
     # Project
     #   Build with 2x r1 and 3x r2
@@ -28,7 +29,7 @@ module Smcty
       @r2.register_dependency(@r4, 1)
       @r3.register_dependency(@r4, 1)
 
-      @factory = Factory.new("factory", 10)
+      @factory = Factory.new("factory", 100)
       @factory.register_resource(@r1, 60)
       @factory.register_resource(@r2, 60)
       @factory.register_resource(@r3, 60)
@@ -111,6 +112,54 @@ module Smcty
       scheduler.plan_project(@project)
 
       scheduler.next.must_equal "wait" # -> although produce r2 is next up
+    end
+
+    it "produces the whole stack from scratch" do
+      # empty store
+      scheduler = Scheduling.new(@configuration)
+      scheduler.plan_project(@project)
+
+      ref_time = Time.now
+
+      9.times do
+        scheduler.next.must_equal "produce #{@r4.name}"
+      end
+
+      Timecop.freeze(ref_time + 80) do
+        9.times do
+          scheduler.next.must_equal "pick #{@r4.name}"
+        end
+
+        expected = {"produce r2" => 5, "produce r3" => 4}
+        9.times do
+          result = scheduler.next
+          expected[result] -= 1
+        end
+        expected["produce r2"].must_equal 0
+        expected["produce r3"].must_equal 0
+      end
+
+      Timecop.freeze(ref_time + 160) do
+        expected = {"pick r2" => 5, "pick r3" => 4}
+        9.times do
+            result = scheduler.next
+            expected[result] -= 1
+        end
+        expected["pick r2"].must_equal 0
+        expected["pick r3"].must_equal 0
+
+        2.times do
+          scheduler.next.must_equal "produce r1"
+        end
+      end
+
+      Timecop.freeze(ref_time + 240) do
+        2.times do
+          scheduler.next.must_equal "pick r1"
+        end
+
+        scheduler.next.must_equal "finish project"
+      end
     end
 
   end
