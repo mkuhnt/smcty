@@ -46,10 +46,10 @@ module Smcty
         @store.stock(@resource_1).must_equal 5
       end
 
-      it "can return allocated stock" do
+      it "can get allocated stock" do
         @store.put(@resource_1, 5)
         allocation = @store.allocate(@resource_1, 3)
-        @store.use(allocation)
+        @store.get(allocation)
 
         @store.free_capacity.must_equal 8
         @store.stock(@resource_1).must_equal 2
@@ -85,22 +85,6 @@ module Smcty
 
         result.must_equal 4
         @store.stock(@resource_2).must_equal 4
-      end
-
-      it "can return a number of items per resource" do
-        @store.put(@resource_1, 5)
-        result = @store.get(@resource_1, 2)
-
-        result.must_equal 2
-        @store.stock(@resource_1).must_equal 3
-      end
-
-      it "cannot return more than the number of items available" do
-        @store.put(@resource_1, 5)
-        result = @store.get(@resource_1, 7)
-
-        result.must_equal 5
-        @store.stock(@resource_1).must_equal 0
       end
 
       it "has a total stock of all resources" do

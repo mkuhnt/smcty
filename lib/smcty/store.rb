@@ -26,13 +26,8 @@ module Smcty
       amount
     end
 
-    def get(resource, _amount=1)
-      in_stock = stock(resource)
-      # at least one but not more than in the stock
-      amount = enforce(1, _amount, in_stock)
-
-      @storage[resource] = in_stock - amount
-      amount
+    def get(allocation)
+      @allocations.delete(allocation)
     end
 
     def stock(resource)
@@ -56,7 +51,7 @@ module Smcty
     end
 
     def allocate(resource, _amount)
-      amount = get(resource, _amount)
+      amount = pop(resource, _amount)
       if amount > 0
         allocation = Allocation.new(resource, amount)
         @allocations.add(allocation)
@@ -68,10 +63,6 @@ module Smcty
 
     def free(allocation)
       put(allocation.resource, allocation.amount)
-      @allocations.delete(allocation)
-    end
-
-    def use(allocation)
       @allocations.delete(allocation)
     end
 
@@ -92,6 +83,15 @@ module Smcty
     end
 
     private
+
+    def pop(resource, _amount=1)
+      in_stock = stock(resource)
+      # at least one but not more than in the stock
+      amount = enforce(1, _amount, in_stock)
+
+      @storage[resource] = in_stock - amount
+      amount
+    end
 
     def enforce(lower, amount, upper)
       [[lower, amount].max, upper].min
