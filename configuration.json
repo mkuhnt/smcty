@@ -4,29 +4,8 @@
     "capacity": 70,
     "stock": [
       {
-        "name": "Lager-Stangen",
-        "amount": 5
-      },{
-        "name": "measure",
-        "amount": 2
-      },{
-        "name": "textile",
-        "amount": 4
-      },{
-        "name": "seed",
-        "amount": 3
-      },{
-        "name": "boards",
-        "amount": 1
-      },{
-        "name": "Tauchermaske",
-        "amount": 2
-      },{
-        "name": "Bulldozer-Schaufel",
-        "amount": 1
-      },{
         "name": "metal",
-        "amount": 4
+        "amount": 2
       },{
         "name": "shovel",
         "amount": 1
@@ -35,16 +14,22 @@
         "amount": 5
       },{
         "name": "minerals",
-        "amount": 3
+        "amount": 2
       },{
-        "name": "wood",
-        "amount": 5
-      },{
-        "name": "veg",
+        "name": "Tauchermaske",
         "amount": 2
       },{
         "name": "Lager-Kamera",
         "amount": 3
+      },{
+        "name": "hat",
+        "amount": 2
+      },{
+        "name": "Rettungsring",
+        "amount": 2
+      },{
+        "name": "veg",
+        "amount": 2
       },{
         "name": "glass",
         "amount": 1
@@ -61,8 +46,20 @@
         "name": "nails",
         "amount": 2
       },{
-        "name": "Rettungsring",
+        "name": "Lager-Stangen",
+        "amount": 3
+      },{
+        "name": "measure",
+        "amount": 1
+      },{
+        "name": "textile",
+        "amount": 3
+      },{
+        "name": "seed",
         "amount": 2
+      },{
+        "name": "Bulldozer-Schaufel",
+        "amount": 1
       }
     ]
   },
@@ -375,6 +372,22 @@
               "amount": 1
             }
           ]
+        },{
+          "name": "furniture",
+          "description": "Gartenmöbel",
+          "time": 8100,
+          "deps": [
+            {
+              "name": "boards",
+              "amount": 2
+            },{
+              "name": "plastic",
+              "amount": 2
+            },{
+              "name": "textile",
+              "amount": 2
+            }
+          ]
         }
       ]
     },{
@@ -423,6 +436,22 @@
               "amount": 2
             },{
               "name": "measure",
+              "amount": 1
+            }
+          ]
+        },{
+          "name": "shoes",
+          "description": "Schuhe",
+          "time": 4500,
+          "deps": [
+            {
+              "name": "textile",
+              "amount": 2
+            },{
+              "name": "plastic",
+              "amount": 1
+            },{
+              "name": "glue",
               "amount": 1
             }
           ]

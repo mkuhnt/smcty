@@ -67,10 +67,17 @@ module Smcty
         continue = process_pick(commands[1..-1])
       when "next"
         continue = process_next
+      when "scheduling"
+        continue = process_scheduling
       else
         puts "unknown command: #{input}"
       end
       return continue
+    end
+
+    def process_scheduling
+      @scheduler.print_job_lists
+      true
     end
 
     def process_next
@@ -98,9 +105,9 @@ module Smcty
             return true
           end
           project.add_requirement(resource, amount)
-          @scheduler.plan_project(project)
-          puts "planned the project"
         end
+        @scheduler.plan_project(project)
+        puts "planned the project"
       else
         puts "not enough parameters for project command"
       end

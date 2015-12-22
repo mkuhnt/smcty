@@ -1,3 +1,5 @@
+require 'smcty/job'
+
 module Smcty
   class Scheduling
 
