@@ -30,7 +30,7 @@ module Smcty
 
     def factory_for(resource)
       @factories.values.each do |factory|
-        resource = factory.resource_by_name(resource_name)
+        resource = factory.resource_by_name(resource.name)
         return factory if resource
       end
       nil
