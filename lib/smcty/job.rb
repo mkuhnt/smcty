@@ -1,40 +1,30 @@
 module Smcty
   class Job
-    attr_reader :resource, :project, :allocation
+    attr_reader :resource
 
-    def initialize(resource, project)
+    def initialize(resource)
       @resource = resource
-      @project = project
       @used = false
-    end
-
-    def new?
-      true
     end
 
     def allocate(allocation)
       @allocation = allocation
     end
 
-    def allocated?
-      @allocation != nil
+    def produce(production)
+      @production = production
     end
 
-    def for_allocation
-      @allocation == nil
+    def status
+      if @allocation && @allocation.valid?
+        return :allocated
+      elsif @production && !@production.finished?
+        return :in_production
+      elsif @production && @production.finished?
+        return :ready
+      else
+        return :new
+      end
     end
-
-    def for_production
-      @production == nil && @allocation == nil
-    end
-
-    def use!
-      @used = true
-    end
-
-    def used?
-      @used
-    end
-
   end
 end

@@ -35,7 +35,7 @@ module Smcty
       time = @production_times[resource]
       if time && free_capacity > 0 && Factory.check_preconditions(resource, allocations)
         allocations.each{ |a| a.get }
-        production = Production.new(self, resource, time)
+        production = Production.new(resource, time)
         @productions << production
         return production
       else
