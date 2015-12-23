@@ -3,7 +3,7 @@ module Smcty
     attr_reader :start_time, :duration, :resource
 
     def initialize(resource, duration, start_time=nil)
-      @start_time = Time.at(start_time) || Time.now
+      @start_time = start_time ? Time.at(start_time) : Time.now
       @duration = duration
       @resource = resource
     end

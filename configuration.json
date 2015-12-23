@@ -5,7 +5,7 @@
     "stock": [
       {
         "name": "metal",
-        "amount": 2
+        "amount": 4
       },{
         "name": "shovel",
         "amount": 1
@@ -20,7 +20,7 @@
         "amount": 2
       },{
         "name": "Lager-Kamera",
-        "amount": 3
+        "amount": 2
       },{
         "name": "hat",
         "amount": 2
@@ -38,7 +38,7 @@
         "amount": 3
       },{
         "name": "chemicals",
-        "amount": 1
+        "amount": 4
       },{
         "name": "plastic",
         "amount": 4
@@ -46,8 +46,8 @@
         "name": "nails",
         "amount": 2
       },{
-        "name": "Lager-Stangen",
-        "amount": 3
+        "name": "Lager-Schloss",
+        "amount": 2
       },{
         "name": "measure",
         "amount": 1
