@@ -5,7 +5,7 @@ def list_inventory(store)
   puts "Current inventory:"
   puts ""
   store.inventory.each do |item|
-    puts "\t#{item.name}: #{store.stock(item)} items (allocated: #{store.allocation_of(item)})"
+    puts "\t#{item.name}: #{store.available_stock(item)} items (allocated: #{store.allocated_stock(item)})"
   end
 end
 

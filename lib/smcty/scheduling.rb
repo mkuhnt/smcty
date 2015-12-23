@@ -48,13 +48,13 @@ module Smcty
       action = project_ready
       return action if action
       # any pure request?
-      action = something_pure_to_produce
+      action = something_dependent_to_produce
       return action if action
       # anything to pickup?
       action = something_to_pick
       return action if action
       # anything that can be produced?
-      action = something_dependent_to_produce
+      action = something_pure_to_produce
       if action
         return action
       else
@@ -123,17 +123,21 @@ module Smcty
       @projects.keys.each do |project|
         @projects[project].each do |job|
           if job.allocated_dependencies?
+
             # extract the requirements
             requirements = job.dependent_jobs.map{|j| j.allocation }
-            # remove the dependent jobs
-            job.dependent_jobs.each{|j| @projects[project].delete(j)}
-            # reset the job dependency
-            job.reset_dependent_jobs
             # produce the resource
+            puts "go for a complex production: #{job.resource}"
             factory = @configuration.factory_for(job.resource)
 
             if factory.free_capacity > 0
               job.produce(factory.produce(job.resource, requirements))
+              
+              # remove the dependent jobs
+              job.dependent_jobs.each{|j| @projects[project].delete(j)}
+              # reset the job dependency
+              job.reset_dependent_jobs
+
               return "produce #{job.resource.name}"
             end
           end
