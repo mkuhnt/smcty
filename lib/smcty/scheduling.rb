@@ -160,6 +160,20 @@ module Smcty
     end
     # debugging
 
+    def to_hash
+      {
+        projects: @projects.keys.map{|p| project_hash(p, @projects[p])}
+      }
+    end
+
+    def project_hash(project, job_list)
+      {
+        "name" => project.name,
+        "requirements" => project.resources.map{|r| {"resource" => r.name, "amount" => project.amount(r)}},
+        "jobs" => job_list.map{|j| j.to_hash}
+      }
+    end
+
     private
 
     def store

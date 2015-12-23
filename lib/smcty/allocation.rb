@@ -15,5 +15,12 @@ module Smcty
     def get
       @store.get(self)
     end
+
+    def to_hash
+      {
+        "resource" => @resource.name,
+        "amount" => @amount
+      }
+    end
   end
 end

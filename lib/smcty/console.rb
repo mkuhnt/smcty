@@ -15,7 +15,7 @@ module Smcty
       @configurator = Configurator.new(config_path)
       @configuration = @configurator.configuration
       @productions = {}
-      @scheduler = Scheduling.new(@configuration)
+
     end
 
     def prompt!
@@ -76,12 +76,12 @@ module Smcty
     end
 
     def process_scheduling
-      @scheduler.print_job_lists
+      @configuration.scheduler.print_job_lists
       true
     end
 
     def process_next
-      puts "DO > #{@scheduler.next}"
+      puts "DO > #{@configuration.scheduler.next}"
       true
     end
 
@@ -106,7 +106,7 @@ module Smcty
           end
           project.add_requirement(resource, amount)
         end
-        @scheduler.plan_project(project)
+        @configuration.scheduler.plan_project(project)
         puts "planned the project"
       else
         puts "not enough parameters for project command"

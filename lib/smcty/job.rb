@@ -57,5 +57,16 @@ module Smcty
       end
     end
 
+    def to_hash
+      core_hash = {
+        "id" => self.object_id,
+        "resource" => @resource.name,
+      }
+      core_hash["allocation"] = @allocation.to_hash if @allocation
+      core_hash["production"] = @production.to_hash if @production
+      core_hash["dependent_jobs"] = @dependent_jobs.map{|j| j.object_id} if @dependent_jobs.size > 0
+      core_hash
+    end
+
   end
 end

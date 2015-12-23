@@ -1,11 +1,12 @@
 module Smcty
   class Configuration
-    attr_reader :created_at, :store
+    attr_reader :created_at, :store, :scheduler
 
     def initialize(store)
       @created_at = Time.new
       @store = store
       @factories = {}
+      @scheduler = Scheduling.new(self)
     end
 
     def register_factory(factory)
@@ -51,7 +52,8 @@ module Smcty
     def to_hash
       {
         "store" => @store.to_hash,
-        "factories" => @factories.values.map{|f| f.to_hash}
+        "factories" => @factories.values.map{|f| f.to_hash},
+        "scheduling" => @scheduler.to_hash
       }
     end
 
