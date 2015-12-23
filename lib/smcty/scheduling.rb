@@ -160,6 +160,10 @@ module Smcty
     end
     # debugging
 
+    def load_project(project, job_list)
+      @projects[project] = job_list
+    end
+
     def to_hash
       {
         projects: @projects.keys.map{|p| project_hash(p, @projects[p])}

@@ -458,5 +458,8 @@
         }
       ]
     }
-  ]
+  ],
+  "scheduling": {
+    "projects": []
+  }
 }

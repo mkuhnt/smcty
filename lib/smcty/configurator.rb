@@ -89,6 +89,70 @@ module Smcty
           store.put(resource, resource_amount)
         end
 
+        # post process the scheduling information
+        scheduling_hash = read_value(data_hash, "scheduling", true)
+        read_value(scheduling_hash, "projects", false, []).each do |project_hash|
+          project_name = read_value(project_hash, "name", true)
+          project = Project.new(project_name)
+          read_value(project_hash, "requirements", true).each do |req|
+            resource_name = read_value(req, "resource", true)
+            amount = read_value(req, "amount", true).to_i
+            resource = configuration.resource_by_name(resource_name)
+            unless resource
+              raise "Cannot register requirement for unknown resource #{resource_name}"
+            end
+            project.add_requirement(resource, amount)
+          end
+
+          job_dict = {}
+          job_dependencies = {}
+          jobs = []
+
+          # first pass to create the single jobs
+          read_value(project_hash, "jobs", true).each do |job_hash|
+            reference = read_value(job_hash, "id", true)
+            resource_name = read_value(job_hash, "resource", true)
+            resource = configuration.resource_by_name(resource_name)
+            unless resource
+              raise "Cannot create job for unknown resource #{resource_name}"
+            end
+            job = Job.new(resource)
+            job_dict[reference] = job
+            jobs << job
+
+            allocation_hash = read_value(job_hash, "allocation", false, nil)
+            if allocation_hash
+              amount = read_value(allocation_hash, "amount", true).to_i
+              allocation = store.load_allocation(resource, amount)
+              job.allocate(allocation) if allocation
+            end
+
+            production_hash = read_value(job_hash, "production", false, nil)
+            if production_hash
+              start_time = read_value(production_hash, "start_time", true).to_i
+              duration = read_value(production_hash, "duration", true).to_i
+              production = Production.new(resource, duration, start_time)
+              job.produce(production)
+            end
+
+            dependency_list = read_value(job_hash, "dependent_jobs", false, nil)
+            job_dependencies[job] = dependency_list if dependency_list
+          end
+
+          # second pass to connect dependent jobs
+          job_dependencies.keys.each do |job|
+            job_dependencies[job].each do |dep_ref|
+              dep_job = job_dict[dep_ref]
+              unless dep_job
+                raise "job references another job which is not known (#{dep_ref})"
+              end
+              job.add_dependent(dep_job)
+            end
+          end
+
+          configuration.scheduler.load_project(project, jobs)
+        end
+
         configuration
       end
     end

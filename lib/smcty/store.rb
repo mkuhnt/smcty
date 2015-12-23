@@ -16,7 +16,6 @@ module Smcty
       @capacity - total_stock - allocated_stock
     end
 
-
     def put(resource, _amount=1)
       # at least one but not more than the free capacity
       amount = enforce(1, _amount, free_capacity)
@@ -51,14 +50,7 @@ module Smcty
     end
 
     def allocate(resource, _amount)
-      amount = pop(resource, _amount)
-      if amount > 0
-        allocation = Allocation.new(self, resource, amount)
-        @allocations.add(allocation)
-        allocation
-      else
-        nil
-      end
+      load_allocation(resource, pop(resource, _amount))
     end
 
     def free(allocation)
@@ -84,6 +76,16 @@ module Smcty
         "capacity" => @capacity,
         "stock" => @storage.keys.map{|k| {"name" => k.name, "amount" => @storage[k]}}
       }
+    end
+
+    def load_allocation(resource, amount)
+      if amount > 0
+        allocation = Allocation.new(self, resource, amount)
+        @allocations.add(allocation)
+        allocation
+      else
+        nil
+      end
     end
 
     private
