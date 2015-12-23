@@ -28,9 +28,8 @@ module Smcty
       while (jobs.size != prev_size) do
         prev_size = jobs.size
         jobs.select{|j| j.new? }.each do |job|
-          allocation = store.allocate(job.resource, 1)
-          if allocation
-            job.allocate(allocation)
+          if store.available_stock(job.resource) >= 1
+            job.allocate(store.allocate(job.resource, 1))
           else
             job.resource.dependent_resources.each do |dr|
               job.resource.dependent_resource_amount(dr).times do
@@ -95,9 +94,9 @@ module Smcty
       @projects.keys.each do |project|
         @projects[project].each do |job|
           if job.new?
-            production = @configuration.factory_for(job.resource).produce(job.resource)
-            if production
-              job.produce(production)
+            factory = @configuration.factory_for(job.resource)
+            if factory.free_capacity > 0
+              job.produce(factory.produce(job.resource))
               return "produce #{job.resource.name}"
             end
           end
@@ -109,7 +108,7 @@ module Smcty
     def something_to_pick
       @projects.keys.each do |project|
         @projects[project].each do |job|
-          if job.ready?
+          if job.ready? && store.free_capacity > 0
             @configuration.factory_for(job.resource).pick(job.production)
             store.put(job.resource, 1)
             job.allocate(store.allocate(job.resource, 1))
@@ -131,9 +130,10 @@ module Smcty
             # reset the job dependency
             job.reset_dependent_jobs
             # produce the resource
-            production = @configuration.factory_for(job.resource).produce(job.resource, requirements)
-            if production
-              job.produce(production)
+            factory = @configuration.factory_for(job.resource)
+
+            if factory.free_capacity > 0
+              job.produce(factory.produce(job.resource, requirements))
               return "produce #{job.resource.name}"
             end
           end

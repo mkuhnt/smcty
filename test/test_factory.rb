@@ -53,8 +53,10 @@ module Smcty
       end
 
       it "does not produce a not registered resource" do
-        @factory.produce(@resource_3).must_be_nil
-        @factory.free_capacity.must_equal @factory.capacity
+
+        assert_raises(RuntimeError) {
+          @factory.produce(@resource_3)
+        }
       end
 
       it "produces a resource without dependencies if capacity is left" do
@@ -67,9 +69,10 @@ module Smcty
 
       it "does not produce a resource without dependencies if no capacity is left" do
         @factory.produce(@resource_1)
-        production = @factory.produce(@resource_1)
 
-        production.must_be_nil
+        assert_raises(RuntimeError) {
+          @factory.produce(@resource_1)
+        }
       end
 
       describe "with dependencies" do
@@ -95,25 +98,26 @@ module Smcty
           alloc_1 = @store.allocate(@resource_1, 1)
           alloc_2 = @store.allocate(@resource_1, 1)
           alloc_2.get
-          production = @factory.produce(@resource_2, [alloc_1, alloc_2])
 
-          production.must_be_nil
-          alloc_1.valid?.must_equal true
+          assert_raises(RuntimeError) {
+            production = @factory.produce(@resource_2, [alloc_1, alloc_2])
+          }
         end
 
         it "does not produce a resource if all dependencies are fullfilled but no capacity is left" do
           @factory.produce(@resource_1)
-          production = @factory.produce(@resource_1)
 
-          production.must_be_nil
+          assert_raises(RuntimeError) {
+            @factory.produce(@resource_1)
+          }
         end
 
         it "does not produce a resource if dependencies are not fullfilled" do
           alloc_1 = @store.allocate(@resource_1, 1)
-          production = @factory.produce(@resource_2, [alloc_1])
 
-          production.must_be_nil
-          alloc_1.valid?.must_equal true
+          assert_raises(RuntimeError) {
+            production = @factory.produce(@resource_2, [alloc_1])
+          }
         end
       end
 

@@ -18,23 +18,26 @@ module Smcty
         result.must_be_kind_of(Allocation)
         result.amount.must_equal 3
         @store.free_capacity.must_equal 5
-        @store.stock(@resource_1).must_equal 2
+        @store.available_stock(@resource_1).must_equal 2
+        @store.allocated_stock(@resource_1).must_equal 3
       end
 
       it "cannot allocate more than available stock" do
         @store.put(@resource_1, 5)
-        result = @store.allocate(@resource_1, 6)
 
-        result.must_be_kind_of(Allocation)
-        result.amount.must_equal 5
+        assert_raises(RuntimeError) {
+          @store.allocate(@resource_1, 6)
+        }
+
         @store.free_capacity.must_equal 5
-        @store.stock(@resource_1).must_equal 0
+        @store.available_stock(@resource_1).must_equal 5
+        @store.allocated_stock(@resource_1).must_equal 0
       end
 
       it "cannot allocate not available stock" do
-        result = @store.allocate(@resource_1, 1)
-
-        result.must_be_nil
+        assert_raises(RuntimeError) {
+          @store.allocate(@resource_1, 6)
+        }
       end
 
       it "can free allocated stock" do
@@ -43,7 +46,8 @@ module Smcty
         @store.free(allocation)
 
         @store.free_capacity.must_equal 5
-        @store.stock(@resource_1).must_equal 5
+        @store.available_stock(@resource_1).must_equal 5
+        @store.allocated_stock(@resource_1).must_equal 0
       end
 
       it "can get allocated stock" do
@@ -52,7 +56,8 @@ module Smcty
         @store.get(allocation)
 
         @store.free_capacity.must_equal 8
-        @store.stock(@resource_1).must_equal 2
+        @store.available_stock(@resource_1).must_equal 2
+        @store.allocated_stock(@resource_1).must_equal 0
       end
 
       it "checks if an allocation is valid" do
@@ -86,22 +91,25 @@ module Smcty
         result = @store.put(@resource_1, 2)
 
         result.must_equal 2
-        @store.stock(@resource_1).must_equal 2
+        @store.available_stock(@resource_1).must_equal 2
       end
 
       it "cannot store more items than the free capacity" do
         @store.put(@resource_1, 6)
-        result = @store.put(@resource_2, 10)
 
-        result.must_equal 4
-        @store.stock(@resource_2).must_equal 4
+        assert_raises(RuntimeError) {
+          @store.put(@resource_2, 10)
+        }
+        @store.free_capacity.must_equal 4
+        @store.available_stock(@resource_2).must_equal 0
       end
 
       it "has a total stock of all resources" do
         @store.put(@resource_1, 4)
         @store.put(@resource_2, 3)
 
-        @store.total_stock.must_equal 7
+        @store.total_available_stock.must_equal 7
+        @store.total_allocated_stock.must_equal 0
       end
 
       it "has an inventory" do

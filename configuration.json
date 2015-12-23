@@ -1,465 +1,1319 @@
 {
-  "store": {
-    "name": "Stadtlager",
-    "capacity": 70,
-    "stock": [
+   "store":{
+      "name":"Stadtlager",
+      "capacity":80,
+      "stock":[
+         {
+            "name":"metal",
+            "amount":1
+         },
+         {
+            "name":"shovel",
+            "amount":1
+         },
+         {
+            "name":"sugar",
+            "amount":5
+         },
+         {
+            "name":"minerals",
+            "amount":1
+         },
+         {
+            "name":"Tauchermaske",
+            "amount":2
+         },
+         {
+            "name":"Lager-Kamera",
+            "amount":2
+         },
+         {
+            "name":"hat",
+            "amount":2
+         },
+         {
+            "name":"Rettungsring",
+            "amount":2
+         },
+         {
+            "name":"veg",
+            "amount":2
+         },
+         {
+            "name":"glass",
+            "amount":1
+         },
+         {
+            "name":"hammer",
+            "amount":1
+         },
+         {
+            "name":"chemicals",
+            "amount":1
+         },
+         {
+            "name":"plastic",
+            "amount":1
+         },
+         {
+            "name":"nails",
+            "amount":1
+         },
+         {
+            "name":"Lager-Schloss",
+            "amount":2
+         },
+         {
+            "name":"measure",
+            "amount":1
+         },
+         {
+            "name":"textile",
+            "amount":1
+         },
+         {
+            "name":"seed",
+            "amount":1
+         },
+         {
+            "name":"Bulldozer-Schaufel",
+            "amount":1
+         },
+         {
+            "name":"grass",
+            "amount":1
+         },
+         {
+            "name":"chair",
+            "amount":1
+         },
+         {
+            "name":"wood",
+            "amount":1
+         },
+         {
+            "name":"furniture",
+            "amount":1
+         },
+         {
+            "name":"boards",
+            "amount":1
+         },
+         {
+            "name":"paint",
+            "amount":1
+         },
+         {
+            "name":"desk",
+            "amount":1
+         }
+      ]
+   },
+   "factories":[
       {
-        "name": "metal",
-        "amount": 4
-      },{
-        "name": "shovel",
-        "amount": 1
-      },{
-        "name": "sugar",
-        "amount": 5
-      },{
-        "name": "minerals",
-        "amount": 2
-      },{
-        "name": "Tauchermaske",
-        "amount": 2
-      },{
-        "name": "Lager-Kamera",
-        "amount": 2
-      },{
-        "name": "hat",
-        "amount": 2
-      },{
-        "name": "Rettungsring",
-        "amount": 2
-      },{
-        "name": "veg",
-        "amount": 2
-      },{
-        "name": "glass",
-        "amount": 1
-      },{
-        "name": "hammer",
-        "amount": 3
-      },{
-        "name": "chemicals",
-        "amount": 4
-      },{
-        "name": "plastic",
-        "amount": 4
-      },{
-        "name": "nails",
-        "amount": 2
-      },{
-        "name": "Lager-Schloss",
-        "amount": 2
-      },{
-        "name": "measure",
-        "amount": 1
-      },{
-        "name": "textile",
-        "amount": 3
-      },{
-        "name": "seed",
-        "amount": 2
-      },{
-        "name": "Bulldozer-Schaufel",
-        "amount": 1
-      }
-    ]
-  },
-  "factories": [
-    {
-      "name": "Fabrik",
-      "capacity": 22,
-      "resources": [
-        {
-          "name": "metal",
-          "description": "Metall",
-          "time": 60
-        },{
-          "name": "textile",
-          "description": "Textilien",
-          "time": 10800
-        },{
-          "name": "wood",
-          "description": "Holz",
-          "time": 180
-        },{
-          "name": "sugar",
-          "description": "Zucker und Gewürze",
-          "time": 14400
-        },{
-          "name": "glass",
-          "description": "Glas",
-          "time": 18000
-        },{
-          "name": "plastic",
-          "description": "Plastik",
-          "time": 540
-        },{
-          "name": "seed",
-          "description": "Samen",
-          "time": 1200
-        },{
-          "name": "minerals",
-          "description": "Mineralstoff",
-          "time": 1800
-        },{
-          "name": "chemicals",
-          "description": "Chemikalien",
-          "time": 7200
-        }
+         "name":"Fabrik",
+         "capacity":22,
+         "resources":[
+            {
+               "name":"metal",
+               "description":"Metall",
+               "time":60,
+               "deps":[
 
+               ]
+            },
+            {
+               "name":"textile",
+               "description":"Textilien",
+               "time":10800,
+               "deps":[
+
+               ]
+            },
+            {
+               "name":"wood",
+               "description":"Holz",
+               "time":180,
+               "deps":[
+
+               ]
+            },
+            {
+               "name":"sugar",
+               "description":"Zucker und Gewürze",
+               "time":14400,
+               "deps":[
+
+               ]
+            },
+            {
+               "name":"glass",
+               "description":"Glas",
+               "time":18000,
+               "deps":[
+
+               ]
+            },
+            {
+               "name":"plastic",
+               "description":"Plastik",
+               "time":540,
+               "deps":[
+
+               ]
+            },
+            {
+               "name":"seed",
+               "description":"Samen",
+               "time":1200,
+               "deps":[
+
+               ]
+            },
+            {
+               "name":"minerals",
+               "description":"Mineralstoff",
+               "time":1800,
+               "deps":[
+
+               ]
+            },
+            {
+               "name":"chemicals",
+               "description":"Chemikalien",
+               "time":7200,
+               "deps":[
+
+               ]
+            }
+         ]
+      },
+      {
+         "name":"Werkzeugladen",
+         "capacity":5,
+         "resources":[
+            {
+               "name":"hammer",
+               "description":"Hammer",
+               "time":756,
+               "deps":[
+                  {
+                     "name":"metal",
+                     "amount":1
+                  },
+                  {
+                     "name":"wood",
+                     "amount":1
+                  }
+               ]
+            },
+            {
+               "name":"measure",
+               "description":"Maßband",
+               "time":1080,
+               "deps":[
+                  {
+                     "name":"metal",
+                     "amount":1
+                  },
+                  {
+                     "name":"plastic",
+                     "amount":1
+                  }
+               ]
+            },
+            {
+               "name":"shovel",
+               "description":"Schaufel",
+               "time":1620,
+               "deps":[
+                  {
+                     "name":"metal",
+                     "amount":1
+                  },
+                  {
+                     "name":"wood",
+                     "amount":1
+                  },
+                  {
+                     "name":"plastic",
+                     "amount":1
+                  }
+               ]
+            },
+            {
+               "name":"cooking",
+               "description":"Kochutensiien",
+               "time":2430,
+               "deps":[
+                  {
+                     "name":"metal",
+                     "amount":2
+                  },
+                  {
+                     "name":"wood",
+                     "amount":2
+                  },
+                  {
+                     "name":"plastic",
+                     "amount":2
+                  }
+               ]
+            },
+            {
+               "name":"ladder",
+               "description":"Leiter",
+               "time":3240,
+               "deps":[
+                  {
+                     "name":"metal",
+                     "amount":2
+                  },
+                  {
+                     "name":"boards",
+                     "amount":2
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name":"Baustoffhandel",
+         "capacity":6,
+         "resources":[
+            {
+               "name":"nails",
+               "description":"Nägel",
+               "time":270,
+               "deps":[
+                  {
+                     "name":"metal",
+                     "amount":2
+                  }
+               ]
+            },
+            {
+               "name":"boards",
+               "description":"Bretter",
+               "time":1620,
+               "deps":[
+                  {
+                     "name":"wood",
+                     "amount":2
+                  }
+               ]
+            },
+            {
+               "name":"brick",
+               "description":"Backsteine",
+               "time":1080,
+               "deps":[
+                  {
+                     "name":"minerals",
+                     "amount":2
+                  }
+               ]
+            },
+            {
+               "name":"cement",
+               "description":"Zement",
+               "time":2700,
+               "deps":[
+                  {
+                     "name":"minerals",
+                     "amount":2
+                  },
+                  {
+                     "name":"chemicals",
+                     "amount":1
+                  }
+               ]
+            },
+            {
+               "name":"glue",
+               "description":"Kleber",
+               "time":3240,
+               "deps":[
+                  {
+                     "name":"plastic",
+                     "amount":1
+                  },
+                  {
+                     "name":"chemicals",
+                     "amount":2
+                  }
+               ]
+            },
+            {
+               "name":"paint",
+               "description":"Farbe",
+               "time":3240,
+               "deps":[
+                  {
+                     "name":"metal",
+                     "amount":2
+                  },
+                  {
+                     "name":"minerals",
+                     "amount":1
+                  },
+                  {
+                     "name":"chemicals",
+                     "amount":2
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name":"Bauernmarkt",
+         "capacity":3,
+         "resources":[
+            {
+               "name":"veg",
+               "description":"Gemüse",
+               "time":1200,
+               "deps":[
+                  {
+                     "name":"seed",
+                     "amount":2
+                  }
+               ]
+            },
+            {
+               "name":"flour",
+               "description":"Mehlbeutel",
+               "time":1800,
+               "deps":[
+                  {
+                     "name":"seed",
+                     "amount":2
+                  },
+                  {
+                     "name":"textile",
+                     "amount":2
+                  }
+               ]
+            },
+            {
+               "name":"fruits",
+               "description":"Obst & Beeren",
+               "time":5400,
+               "deps":[
+                  {
+                     "name":"seed",
+                     "amount":2
+                  },
+                  {
+                     "name":"tiller",
+                     "amount":1
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name":"Möbelladen",
+         "capacity":3,
+         "resources":[
+            {
+               "name":"chair",
+               "description":"Stühle",
+               "time":1200,
+               "deps":[
+                  {
+                     "name":"wood",
+                     "amount":2
+                  },
+                  {
+                     "name":"nails",
+                     "amount":1
+                  },
+                  {
+                     "name":"hammer",
+                     "amount":1
+                  }
+               ]
+            },
+            {
+               "name":"desk",
+               "description":"Tische",
+               "time":1800,
+               "deps":[
+                  {
+                     "name":"boards",
+                     "amount":1
+                  },
+                  {
+                     "name":"nails",
+                     "amount":2
+                  },
+                  {
+                     "name":"hammer",
+                     "amount":1
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name":"Garten-Equipment",
+         "capacity":2,
+         "resources":[
+            {
+               "name":"grass",
+               "description":"Gras",
+               "time":1800,
+               "deps":[
+                  {
+                     "name":"seed",
+                     "amount":1
+                  },
+                  {
+                     "name":"shovel",
+                     "amount":1
+                  }
+               ]
+            },
+            {
+               "name":"tiller",
+               "description":"Schösslinge",
+               "time":5400,
+               "deps":[
+                  {
+                     "name":"seed",
+                     "amount":2
+                  },
+                  {
+                     "name":"shovel",
+                     "amount":1
+                  }
+               ]
+            },
+            {
+               "name":"furniture",
+               "description":"Gartenmöbel",
+               "time":8100,
+               "deps":[
+                  {
+                     "name":"boards",
+                     "amount":2
+                  },
+                  {
+                     "name":"plastic",
+                     "amount":2
+                  },
+                  {
+                     "name":"textile",
+                     "amount":2
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name":"Donut-Laden",
+         "capacity":2,
+         "resources":[
+            {
+               "name":"donuts",
+               "description":"Donuts",
+               "time":2700,
+               "deps":[
+                  {
+                     "name":"flour",
+                     "amount":1
+                  },
+                  {
+                     "name":"sugar",
+                     "amount":1
+                  }
+               ]
+            },
+            {
+               "name":"smoothie",
+               "description":"Gemüse Smoothie",
+               "time":1800,
+               "deps":[
+                  {
+                     "name":"veg",
+                     "amount":1
+                  },
+                  {
+                     "name":"fruits",
+                     "amount":1
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "name":"Modegeschäft",
+         "capacity":2,
+         "resources":[
+            {
+               "name":"hat",
+               "description":"Hut",
+               "time":3600,
+               "deps":[
+                  {
+                     "name":"textile",
+                     "amount":2
+                  },
+                  {
+                     "name":"measure",
+                     "amount":1
+                  }
+               ]
+            },
+            {
+               "name":"shoes",
+               "description":"Schuhe",
+               "time":4500,
+               "deps":[
+                  {
+                     "name":"textile",
+                     "amount":2
+                  },
+                  {
+                     "name":"plastic",
+                     "amount":1
+                  },
+                  {
+                     "name":"glue",
+                     "amount":1
+                  }
+               ]
+            }
+         ]
+      }
+   ],
+   "scheduling":{
+      "projects":[
+         {
+            "name":"52-1314-57",
+            "requirements":[
+               {
+                  "resource":"grass",
+                  "amount":1
+               },
+               {
+                  "resource":"chair",
+                  "amount":1
+               },
+               {
+                  "resource":"plastic",
+                  "amount":1
+               }
+            ],
+            "jobs":[
+               {
+                  "id":70258297848440,
+                  "resource":"grass",
+                  "dependent_jobs":[
+                     70258297847820,
+                     70258297839360
+                  ]
+               },
+               {
+                  "id":70258297848240,
+                  "resource":"chair",
+                  "dependent_jobs":[
+                     70258297839180,
+                     70258297838960,
+                     70258297838740,
+                     70258297838520
+                  ]
+               },
+               {
+                  "id":70258297848060,
+                  "resource":"plastic",
+                  "allocation":{
+                     "resource":"plastic",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297847820,
+                  "resource":"seed",
+                  "allocation":{
+                     "resource":"seed",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297839360,
+                  "resource":"shovel",
+                  "dependent_jobs":[
+                     70258297838300,
+                     70258297838080,
+                     70258297837860
+                  ]
+               },
+               {
+                  "id":70258297839180,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297838960,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297838740,
+                  "resource":"nails",
+                  "allocation":{
+                     "resource":"nails",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297838520,
+                  "resource":"hammer",
+                  "allocation":{
+                     "resource":"hammer",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297838300,
+                  "resource":"metal",
+                  "allocation":{
+                     "resource":"metal",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297838080,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297837860,
+                  "resource":"plastic",
+                  "allocation":{
+                     "resource":"plastic",
+                     "amount":1
+                  }
+               }
+            ]
+         },
+         {
+            "name":"104-1216-57",
+            "requirements":[
+               {
+                  "resource":"furniture",
+                  "amount":1
+               }
+            ],
+            "jobs":[
+               {
+                  "id":70258297837360,
+                  "resource":"furniture",
+                  "dependent_jobs":[
+                     70258297837180,
+                     70258297837000,
+                     70258297836820,
+                     70258297836600,
+                     70258297836380,
+                     70258297836160
+                  ]
+               },
+               {
+                  "id":70258297837180,
+                  "resource":"boards",
+                  "dependent_jobs":[
+                     70258297835940,
+                     70258297835720
+                  ]
+               },
+               {
+                  "id":70258297837000,
+                  "resource":"boards",
+                  "dependent_jobs":[
+                     70258297835500,
+                     70258297835280
+                  ]
+               },
+               {
+                  "id":70258297836820,
+                  "resource":"plastic",
+                  "allocation":{
+                     "resource":"plastic",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297836600,
+                  "resource":"plastic",
+                  "allocation":{
+                     "resource":"plastic",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297836380,
+                  "resource":"textile",
+                  "allocation":{
+                     "resource":"textile",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297836160,
+                  "resource":"textile",
+                  "allocation":{
+                     "resource":"textile",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297835940,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297835720,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297835500,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297835280,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               }
+            ]
+         },
+         {
+            "name":"52-1217-57",
+            "requirements":[
+               {
+                  "resource":"metal",
+                  "amount":2
+               },
+               {
+                  "resource":"paint",
+                  "amount":1
+               },
+               {
+                  "resource":"hammer",
+                  "amount":1
+               },
+               {
+                  "resource":"minerals",
+                  "amount":1
+               }
+            ],
+            "jobs":[
+               {
+                  "id":70258297834560,
+                  "resource":"metal",
+                  "allocation":{
+                     "resource":"metal",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297834340,
+                  "resource":"metal",
+                  "allocation":{
+                     "resource":"metal",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297834120,
+                  "resource":"paint",
+                  "dependent_jobs":[
+                     70258297833500,
+                     70258297833280,
+                     70258297833060,
+                     70258297832840,
+                     70258297832620
+                  ]
+               },
+               {
+                  "id":70258297833940,
+                  "resource":"hammer",
+                  "allocation":{
+                     "resource":"hammer",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297833720,
+                  "resource":"minerals",
+                  "allocation":{
+                     "resource":"minerals",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297833500,
+                  "resource":"metal",
+                  "allocation":{
+                     "resource":"metal",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297833280,
+                  "resource":"metal",
+                  "allocation":{
+                     "resource":"metal",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297833060,
+                  "resource":"minerals",
+                  "allocation":{
+                     "resource":"minerals",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297832840,
+                  "resource":"chemicals",
+                  "allocation":{
+                     "resource":"chemicals",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297832620,
+                  "resource":"chemicals",
+                  "production":{
+                     "start_time":1450878344,
+                     "duration":7200,
+                     "resource":"chemicals"
+                  }
+               }
+            ]
+         },
+         {
+            "name":"52-1266-56",
+            "requirements":[
+               {
+                  "resource":"wood",
+                  "amount":7
+               },
+               {
+                  "resource":"hammer",
+                  "amount":4
+               }
+            ],
+            "jobs":[
+               {
+                  "id":70258297832020,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297831800,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297831580,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297823120,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297822900,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297822680,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297822460,
+                  "resource":"wood",
+                  "allocation":{
+                     "resource":"wood",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297822240,
+                  "resource":"hammer",
+                  "allocation":{
+                     "resource":"hammer",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297822020,
+                  "resource":"hammer",
+                  "dependent_jobs":[
+                     70258297821480,
+                     70258297821260
+                  ]
+               },
+               {
+                  "id":70258297821840,
+                  "resource":"hammer",
+                  "dependent_jobs":[
+                     70258297821000,
+                     70258297820740
+                  ]
+               },
+               {
+                  "id":70258297821660,
+                  "resource":"hammer",
+                  "dependent_jobs":[
+                     70258297820480,
+                     70258297820300
+                  ]
+               },
+               {
+                  "id":70258297821480,
+                  "resource":"metal",
+                  "allocation":{
+                     "resource":"metal",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297821260,
+                  "resource":"wood",
+                  "production":{
+                     "start_time":1450879314,
+                     "duration":180,
+                     "resource":"wood"
+                  }
+               },
+               {
+                  "id":70258297821000,
+                  "resource":"metal",
+                  "production":{
+                     "start_time":1450879277,
+                     "duration":60,
+                     "resource":"metal"
+                  }
+               },
+               {
+                  "id":70258297820740,
+                  "resource":"wood",
+                  "production":{
+                     "start_time":1450879153,
+                     "duration":180,
+                     "resource":"wood"
+                  }
+               },
+               {
+                  "id":70258297820480,
+                  "resource":"metal"
+               },
+               {
+                  "id":70258297820300,
+                  "resource":"wood",
+                  "production":{
+                     "start_time":1450879198,
+                     "duration":180,
+                     "resource":"wood"
+                  }
+               }
+            ]
+         },
+         {
+            "name":"154-1018-56",
+            "requirements":[
+               {
+                  "resource":"metal",
+                  "amount":2
+               },
+               {
+                  "resource":"wood",
+                  "amount":1
+               },
+               {
+                  "resource":"desk",
+                  "amount":1
+               },
+               {
+                  "resource":"glass",
+                  "amount":1
+               }
+            ],
+            "jobs":[
+               {
+                  "id":70258297819540,
+                  "resource":"metal",
+                  "production":{
+                     "start_time":1450879302,
+                     "duration":60,
+                     "resource":"metal"
+                  }
+               },
+               {
+                  "id":70258297819280,
+                  "resource":"metal",
+                  "production":{
+                     "start_time":1450879235,
+                     "duration":60,
+                     "resource":"metal"
+                  }
+               },
+               {
+                  "id":70258297819020,
+                  "resource":"wood",
+                  "production":{
+                     "start_time":1450879266,
+                     "duration":180,
+                     "resource":"wood"
+                  }
+               },
+               {
+                  "id":70258297818760,
+                  "resource":"desk",
+                  "dependent_jobs":[
+                     70258297818360,
+                     70258297818180,
+                     70258297817960,
+                     70258297817780
+                  ]
+               },
+               {
+                  "id":70258297818580,
+                  "resource":"glass",
+                  "allocation":{
+                     "resource":"glass",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297818360,
+                  "resource":"boards",
+                  "dependent_jobs":[
+                     70258297817600,
+                     70258297817340
+                  ]
+               },
+               {
+                  "id":70258297818180,
+                  "resource":"nails",
+                  "allocation":{
+                     "resource":"nails",
+                     "amount":1
+                  }
+               },
+               {
+                  "id":70258297817960,
+                  "resource":"nails",
+                  "dependent_jobs":[
+                     70258297817080,
+                     70258297816820
+                  ]
+               },
+               {
+                  "id":70258297817780,
+                  "resource":"hammer",
+                  "dependent_jobs":[
+                     70258297816560,
+                     70258297816300
+                  ]
+               },
+               {
+                  "id":70258297817600,
+                  "resource":"wood",
+                  "production":{
+                     "start_time":1450878916,
+                     "duration":180,
+                     "resource":"wood"
+                  }
+               },
+               {
+                  "id":70258297817340,
+                  "resource":"wood",
+                  "production":{
+                     "start_time":1450878920,
+                     "duration":180,
+                     "resource":"wood"
+                  }
+               },
+               {
+                  "id":70258297817080,
+                  "resource":"metal",
+                  "production":{
+                     "start_time":1450878924,
+                     "duration":60,
+                     "resource":"metal"
+                  }
+               },
+               {
+                  "id":70258297816820,
+                  "resource":"metal",
+                  "production":{
+                     "start_time":1450878927,
+                     "duration":60,
+                     "resource":"metal"
+                  }
+               },
+               {
+                  "id":70258297816560,
+                  "resource":"metal",
+                  "production":{
+                     "start_time":1450878930,
+                     "duration":60,
+                     "resource":"metal"
+                  }
+               },
+               {
+                  "id":70258297816300,
+                  "resource":"wood",
+                  "production":{
+                     "start_time":1450878936,
+                     "duration":180,
+                     "resource":"wood"
+                  }
+               }
+            ]
+         },
+         {
+            "name":"313-1293-57",
+            "requirements":[
+               {
+                  "resource":"chair",
+                  "amount":1
+               }
+            ],
+            "jobs":[
+               {
+                  "id":70258297815780,
+                  "resource":"chair",
+                  "dependent_jobs":[
+                     70258297815600,
+                     70258297815340,
+                     70258297815080,
+                     70258297806660
+                  ]
+               },
+               {
+                  "id":70258297815600,
+                  "resource":"wood",
+                  "production":{
+                     "start_time":1450878940,
+                     "duration":180,
+                     "resource":"wood"
+                  }
+               },
+               {
+                  "id":70258297815340,
+                  "resource":"wood",
+                  "production":{
+                     "start_time":1450878946,
+                     "duration":180,
+                     "resource":"wood"
+                  }
+               },
+               {
+                  "id":70258297815080,
+                  "resource":"nails",
+                  "dependent_jobs":[
+                     70258297806480,
+                     70258297806220
+                  ]
+               },
+               {
+                  "id":70258297806660,
+                  "resource":"hammer",
+                  "dependent_jobs":[
+                     70258297805960,
+                     70258297805700
+                  ]
+               },
+               {
+                  "id":70258297806480,
+                  "resource":"metal",
+                  "production":{
+                     "start_time":1450878949,
+                     "duration":60,
+                     "resource":"metal"
+                  }
+               },
+               {
+                  "id":70258297806220,
+                  "resource":"metal",
+                  "production":{
+                     "start_time":1450878969,
+                     "duration":60,
+                     "resource":"metal"
+                  }
+               },
+               {
+                  "id":70258297805960,
+                  "resource":"metal",
+                  "production":{
+                     "start_time":1450878976,
+                     "duration":60,
+                     "resource":"metal"
+                  }
+               },
+               {
+                  "id":70258297805700,
+                  "resource":"wood",
+                  "production":{
+                     "start_time":1450879094,
+                     "duration":180,
+                     "resource":"wood"
+                  }
+               }
+            ]
+         }
       ]
-    },{
-      "name": "Werkzeugladen",
-      "capacity": 5,
-      "resources": [
-        {
-          "name": "hammer",
-          "description": "Hammer",
-          "time": 756,
-          "deps": [
-            {
-              "name": "metal",
-              "amount": 1
-            },{
-              "name": "wood",
-              "amount": 1
-            }
-          ]
-        },{
-          "name": "measure",
-          "description": "Maßband",
-          "time": 1080,
-          "deps": [
-            {
-              "name": "metal",
-              "amount": 1
-            },{
-              "name": "plastic",
-              "amount": 1
-            }
-          ]
-        },{
-          "name": "shovel",
-          "description": "Schaufel",
-          "time": 1620,
-          "deps": [
-            {
-              "name": "metal",
-              "amount": 1
-            },{
-              "name": "wood",
-              "amount": 1
-            },{
-              "name": "plastic",
-              "amount": 1
-            }
-          ]
-        },{
-          "name": "cooking",
-          "description": "Kochutensiien",
-          "time": 2430,
-          "deps": [
-            {
-              "name": "metal",
-              "amount": 2
-            },{
-              "name": "wood",
-              "amount": 2
-            },{
-              "name": "plastic",
-              "amount": 2
-            }
-          ]
-        },{
-          "name": "ladder",
-          "description": "Leiter",
-          "time": 3240,
-          "deps": [
-            {
-              "name": "boards",
-              "amount": 2
-            },{
-              "name": "metal",
-              "amount": 2
-            }
-          ]
-        }
-      ]
-    },{
-      "name": "Baustoffhandel",
-      "capacity": 6,
-      "resources": [
-        {
-          "name": "nails",
-          "description": "Nägel",
-          "time": 270,
-          "deps": [
-            {
-              "name": "metal",
-              "amount": 2
-            }
-          ]
-        },{
-          "name": "boards",
-          "description": "Bretter",
-          "time": 1620,
-          "deps": [
-            {
-              "name": "wood",
-              "amount": 2
-            }
-          ]
-        },{
-          "name": "brick",
-          "description": "Backsteine",
-          "time": 1080,
-          "deps": [
-            {
-              "name": "minerals",
-              "amount": 2
-            }
-          ]
-        },{
-          "name": "cement",
-          "description": "Zement",
-          "time": 2700,
-          "deps": [
-            {
-              "name": "minerals",
-              "amount": 2
-            }, {
-              "name": "chemicals",
-              "amount": 1
-            }
-          ]
-        },{
-          "name": "glue",
-          "description": "Kleber",
-          "time": 3240,
-          "deps": [
-            {
-              "name": "plastic",
-              "amount": 1
-            },{
-              "name": "chemicals",
-              "amount": 2
-            }
-          ]
-        },{
-          "name": "paint",
-          "description": "Farbe",
-          "time": 3240,
-          "deps": [
-            {
-              "name": "metal",
-              "amount": 2
-            },{
-              "name": "minerals",
-              "amount": 1
-            },{
-              "name": "chemicals",
-              "amount": 2
-            }
-          ]
-        }
-      ]
-    },{
-      "name": "Bauernmarkt",
-      "capacity": 3,
-      "resources": [
-        {
-          "name": "veg",
-          "description": "Gemüse",
-          "time": 1200,
-          "deps": [
-            {
-              "name": "seed",
-              "amount": 2
-            }
-          ]
-        },{
-          "name": "flour",
-          "description": "Mehlbeutel",
-          "time": 1800,
-          "deps": [
-            {
-              "name": "seed",
-              "amount": 2
-            },{
-              "name": "textile",
-              "amount": 2
-            }
-          ]
-        },{
-          "name": "fruits",
-          "description": "Obst & Beeren",
-          "time": 5400,
-          "deps": [
-            {
-              "name": "seed",
-              "amount": 2
-            },{
-              "name": "tiller",
-              "amount": 1
-            }
-          ]
-        }
-      ]
-    },{
-      "name": "Möbelladen",
-      "capacity": 3,
-      "resources": [
-        {
-          "name": "chair",
-          "description": "Stühle",
-          "time": 1200,
-          "deps": [
-            {
-              "name": "wood",
-              "amount": 2
-            },{
-              "name": "nails",
-              "amount": 1
-            },{
-              "name": "hammer",
-              "amount": 1
-            }
-          ]
-        },{
-          "name": "desk",
-          "description": "Tische",
-          "time": 1800,
-          "deps": [
-            {
-              "name": "boards",
-              "amount": 1
-            },{
-              "name": "nails",
-              "amount": 2
-            },{
-              "name": "hammer",
-              "amount": 1
-            }
-          ]
-        }
-      ]
-    },{
-      "name": "Garten-Equipment",
-      "capacity": 2,
-      "resources": [
-        {
-          "name": "grass",
-          "description": "Gras",
-          "time": 1800,
-          "deps": [
-            {
-              "name": "seed",
-              "amount": 1
-            },{
-              "name": "shovel",
-              "amount": 1
-            }
-          ]
-        },{
-          "name": "tiller",
-          "description": "Schösslinge",
-          "time": 5400,
-          "deps": [
-            {
-              "name": "seed",
-              "amount": 2
-            },{
-              "name": "shovel",
-              "amount": 1
-            }
-          ]
-        },{
-          "name": "furniture",
-          "description": "Gartenmöbel",
-          "time": 8100,
-          "deps": [
-            {
-              "name": "boards",
-              "amount": 2
-            },{
-              "name": "plastic",
-              "amount": 2
-            },{
-              "name": "textile",
-              "amount": 2
-            }
-          ]
-        }
-      ]
-    },{
-      "name": "Donut-Laden",
-      "capacity": 2,
-      "resources": [
-        {
-          "name": "donuts",
-          "description": "Donuts",
-          "time": 2700,
-          "deps": [
-            {
-              "name": "flour",
-              "amount": 1
-            },{
-              "name": "sugar",
-              "amount": 1
-            }
-          ]
-        },{
-          "name": "smoothie",
-          "description": "Gemüse Smoothie",
-          "time": 1800,
-          "deps": [
-            {
-              "name": "veg",
-              "amount": 1
-            },{
-              "name": "fruits",
-              "amount": 1
-            }
-          ]
-        }
-      ]
-    },{
-      "name": "Modegeschäft",
-      "capacity": 2,
-      "resources": [
-        {
-          "name": "hat",
-          "description": "Hut",
-          "time": 3600,
-          "deps": [
-            {
-              "name": "textile",
-              "amount": 2
-            },{
-              "name": "measure",
-              "amount": 1
-            }
-          ]
-        },{
-          "name": "shoes",
-          "description": "Schuhe",
-          "time": 4500,
-          "deps": [
-            {
-              "name": "textile",
-              "amount": 2
-            },{
-              "name": "plastic",
-              "amount": 1
-            },{
-              "name": "glue",
-              "amount": 1
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "scheduling": {
-    "projects": []
-  }
+   }
 }

@@ -32,15 +32,23 @@ module Smcty
     end
 
     def produce(resource, allocations=[])
-      time = @production_times[resource]
-      if time && free_capacity > 0 && Factory.check_preconditions(resource, allocations)
-        allocations.each{ |a| a.get }
-        production = Production.new(resource, time)
-        @productions << production
-        return production
-      else
-        nil
+      unless free_capacity > 0
+        raise "The factory has no capacity for further production"
       end
+
+      unless Factory.check_preconditions(resource, allocations)
+        raise "The preconditions for this production aren't met"
+      end
+
+      time = @production_times[resource]
+      unless time
+        raise "The resource #{resource.name} is not registered with this factory"
+      end
+
+      allocations.each{ |a| a.get }
+      production = Production.new(resource, time)
+      @productions << production
+      production
     end
 
     def pick(production)

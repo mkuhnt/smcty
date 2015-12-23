@@ -1,11 +1,11 @@
 def list_inventory(store)
-  puts "-------------------------------------------------------------------"
+  puts "---------------------------------------------------------------------------------------"
   puts store.to_s
-  puts "-------------------------------------------------------------------"
+  puts "---------------------------------------------------------------------------------------"
   puts "Current inventory:"
   puts ""
   store.inventory.each do |item|
-    puts "\t#{item.name} (#{item.description}): #{store.stock(item)} items"
+    puts "\t#{item.name}: #{store.stock(item)} items (allocated: #{store.allocation_of(item)})"
   end
 end
 

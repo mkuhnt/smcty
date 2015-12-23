@@ -123,7 +123,7 @@ module Smcty
             allocation_hash = read_value(job_hash, "allocation", false, nil)
             if allocation_hash
               amount = read_value(allocation_hash, "amount", true).to_i
-              allocation = store.load_allocation(resource, amount)
+              allocation = store.allocate(resource, amount)
               job.allocate(allocation) if allocation
             end
 

@@ -13,27 +13,10 @@ module Smcty
     end
 
     def free_capacity
-      @capacity - total_stock - allocated_stock
+      @capacity - total_available_stock - total_allocated_stock
     end
 
-    def put(resource, _amount=1)
-      # at least one but not more than the free capacity
-      amount = enforce(1, _amount, free_capacity)
-
-      in_stock = stock(resource)
-      @storage[resource] = in_stock + amount
-      amount
-    end
-
-    def get(allocation)
-      @allocations.delete(allocation)
-    end
-
-    def stock(resource)
-      @storage[resource] || 0
-    end
-
-    def total_stock
+    def total_available_stock
       result = 0
       @storage.values.each do |value|
         result += value
@@ -41,7 +24,7 @@ module Smcty
       result
     end
 
-    def allocated_stock
+    def total_allocated_stock
       result = 0
       @allocations.each do |alloc|
         result += alloc.amount
@@ -49,8 +32,52 @@ module Smcty
       result
     end
 
+    def available_stock(resource)
+      @storage[resource] || 0
+    end
+
+    def allocated_stock(resource)
+      result = 0
+      @allocations.each do |alloc|
+        result += alloc.amount if resource == alloc.resource
+      end
+      result
+    end
+
+    def total_stock(resource)
+      available_stock(resource) + allocated_stock(resource)
+    end
+
+    def put(resource, _amount=1)
+      # at least one item of the resource
+      amount = [1, _amount].max
+
+      unless free_capacity >= amount
+        raise "The store is full - Cannot put #{amount} items of #{resource.name}"
+      end
+
+      in_stock = available_stock(resource)
+      @storage[resource] = in_stock + amount
+      amount
+    end
+
     def allocate(resource, _amount)
-      load_allocation(resource, pop(resource, _amount))
+      # at least one item of the resource
+      amount = [1, _amount].max
+
+      in_stock = available_stock(resource)
+      unless in_stock >= amount
+        raise "#{in_stock} is not enough of #{resource.name} to allocate #{amount} items"
+      end
+
+      @storage[resource] = in_stock - amount
+      allocation = Allocation.new(self, resource, amount)
+      @allocations.add(allocation)
+      allocation
+    end
+
+    def get(allocation)
+      @allocations.delete(allocation)
     end
 
     def free(allocation)
@@ -67,37 +94,18 @@ module Smcty
     end
 
     def to_s
-      "Store '#{@name}' has a capacity of #{@capacity} and a total stock of #{total_stock}"
+      "Store #{@name} has a total capacity of #{@capacity} whereas the free capacity is #{free_capacity}"
     end
 
     def to_hash
       {
         "name" => @name,
         "capacity" => @capacity,
-        "stock" => @storage.keys.map{|k| {"name" => k.name, "amount" => @storage[k]}}
+        "stock" => @storage.keys.map{|k| {"name" => k.name, "amount" => total_stock(k)}}
       }
     end
 
-    def load_allocation(resource, amount)
-      if amount > 0
-        allocation = Allocation.new(self, resource, amount)
-        @allocations.add(allocation)
-        allocation
-      else
-        nil
-      end
-    end
-
     private
-
-    def pop(resource, _amount=1)
-      in_stock = stock(resource)
-      # at least one but not more than in the stock
-      amount = enforce(1, _amount, in_stock)
-
-      @storage[resource] = in_stock - amount
-      amount
-    end
 
     def enforce(lower, amount, upper)
       [[lower, amount].max, upper].min

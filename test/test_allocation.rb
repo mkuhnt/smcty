@@ -30,7 +30,8 @@ module Smcty
       allocation.get
 
       allocation.valid?.must_equal false
-      @store.stock(@resource_1).must_equal 3
+      @store.available_stock(@resource_1).must_equal 3
+      @store.allocated_stock(@resource_1).must_equal 0
 
     end
   end
