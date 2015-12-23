@@ -45,15 +45,41 @@ module Smcty
     end
 
     def next
+      # any project finished?
+      action = project_ready
+      return action if action
+      # any pure request?
+      action = something_pure_to_produce
+      return action if action
+      # anything to pickup?
+      action = something_to_pick
+      return action if action
+      # anything that can be produced?
+      action = something_dependent_to_produce
+      if action
+        return action
+      else
+        return "wait"
+      end
+    end
+
+    def project_ready
       @projects.keys.each do |project|
-        if project_ready?(project)
+        ready = true
+        @projects[project].each do |job|
+          unless job.allocated?
+            ready = false
+            break
+          end
+        end
+
+        if ready
           finish_project(project)
           # we are done and the project can be finished.
           return "finish #{project.name}"
-        else
-          return select_action(project)
         end
       end
+      nil
     end
 
     def finish_project(project)
@@ -63,6 +89,57 @@ module Smcty
       end
       # remove the project from scheduling
       @projects.delete(project)
+    end
+
+    def something_pure_to_produce
+      @projects.keys.each do |project|
+        @projects[project].each do |job|
+          if job.new?
+            production = @configuration.factory_for(job.resource).produce(job.resource)
+            if production
+              job.produce(production)
+              return "produce #{job.resource.name}"
+            end
+          end
+        end
+      end
+      nil
+    end
+
+    def something_to_pick
+      @projects.keys.each do |project|
+        @projects[project].each do |job|
+          if job.ready?
+            @configuration.factory_for(job.resource).pick(job.production)
+            store.put(job.resource, 1)
+            job.allocate(store.allocate(job.resource, 1))
+            return "pick #{job.resource.name}"
+          end
+        end
+      end
+      nil
+    end
+
+    def something_dependent_to_produce
+      @projects.keys.each do |project|
+        @projects[project].each do |job|
+          if job.allocated_dependencies?
+            # extract the requirements
+            requirements = job.dependent_jobs.map{|j| j.allocation }
+            # remove the dependent jobs
+            job.dependent_jobs.each{|j| @projects[project].delete(j)}
+            # reset the job dependency
+            job.reset_dependent_jobs
+            # produce the resource
+            production = @configuration.factory_for(job.resource).produce(job.resource, requirements)
+            if production
+              job.produce(production)
+              return "produce #{job.resource.name}"
+            end
+          end
+        end
+      end
+      nil
     end
 
     # debugging
@@ -82,73 +159,6 @@ module Smcty
       "#{job.resource.name}: allocation: #{job.allocation} production: #{job.production} dependent: #{job.dependent_jobs.map{|j| j.resource.name}} new: #{job.new?} ready: #{job.ready?} allocated dependencies: #{job.allocated_dependencies?}"
     end
     # debugging
-
-    def project_ready?(project)
-      @projects[project].each do |job|
-        return false unless job.allocated?
-      end
-      return true
-    end
-
-    def select_action(project)
-      action = something_pure_to_produce(project)
-      return action if action
-      action = something_to_pick(project)
-      return action if action
-      action = something_dependent_to_produce(project)
-      if action
-        return action
-      else
-        return "wait"
-      end
-    end
-
-    def something_pure_to_produce(project)
-      @projects[project].each do |job|
-        #puts "work on job: #{job_line(job)}"
-        if job.new?
-          production = @configuration.factory_for(job.resource).produce(job.resource)
-          if production
-            job.produce(production)
-            return "produce #{job.resource.name}"
-          end
-        end
-      end
-      nil
-    end
-
-    def something_to_pick(project)
-      @projects[project].each do |job|
-        if job.ready?
-          @configuration.factory_for(job.resource).pick(job.production)
-          store.put(job.resource, 1)
-          job.allocate(store.allocate(job.resource, 1))
-          return "pick #{job.resource.name}"
-        end
-      end
-      nil
-    end
-
-    def something_dependent_to_produce(project)
-      @projects[project].each do |job|
-        if job.allocated_dependencies?
-          # extract the requirements
-          requirements = job.dependent_jobs.map{|j| j.allocation }
-          # remove the dependent jobs
-          job.dependent_jobs.each{|j| @projects[project].delete(j)}
-          # reset the job dependency
-          job.reset_dependent_jobs
-          # produce the resource
-          production = @configuration.factory_for(job.resource).produce(job.resource, requirements)
-          if production
-            job.produce(production)
-            return "produce #{job.resource.name}"
-          end
-        end
-      end
-      nil
-    end
-
 
     private
 
