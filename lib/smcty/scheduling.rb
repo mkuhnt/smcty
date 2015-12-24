@@ -127,12 +127,13 @@ module Smcty
             # extract the requirements
             requirements = job.dependent_jobs.map{|j| j.allocation }
             # produce the resource
-            puts "go for a complex production: #{job.resource}"
+
             factory = @configuration.factory_for(job.resource)
 
             if factory.free_capacity > 0
+              puts "go for a complex production: #{job.resource}"
               job.produce(factory.produce(job.resource, requirements))
-              
+
               # remove the dependent jobs
               job.dependent_jobs.each{|j| @projects[project].delete(j)}
               # reset the job dependency
