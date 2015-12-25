@@ -67,6 +67,8 @@ module Smcty
         continue = process_pick(commands[1..-1])
       when "next"
         continue = process_next
+      when "save"
+        continue = process_save
       when "scheduling"
         continue = process_scheduling
       else
@@ -177,6 +179,12 @@ module Smcty
       puts "Storing configuration back to file and exit."
       @configurator.save
       false
+    end
+
+    def process_save
+      puts "Storing configuration back to file"
+      @configurator.save
+      true
     end
 
     def process_store(commands)
