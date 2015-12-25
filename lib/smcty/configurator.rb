@@ -36,8 +36,9 @@ module Smcty
         factories_list.each do |factory_hash|
           factory_name = read_value(factory_hash, "name", true)
           factory_capacity = read_value(factory_hash, "capacity", true)
+          factory_sequential = read_value(factory_hash, "sequential", false, false)
 
-          factory = Factory.new(factory_name, factory_capacity)
+          factory = Factory.new(factory_name, factory_capacity, factory_sequential)
           configuration.register_factory(factory)
 
           factory_resources = read_value(factory_hash, "resources", true)

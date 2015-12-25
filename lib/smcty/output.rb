@@ -39,6 +39,7 @@ end
 def list_factory(factory)
   puts "-------------------------------------------------------------------"
   puts factory.to_s
+  puts "sequential: #{factory.sequential}"
   puts "-------------------------------------------------------------------"
   puts "Available resources:"
   puts ""

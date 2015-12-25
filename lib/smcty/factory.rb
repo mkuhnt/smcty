@@ -1,13 +1,14 @@
 module Smcty
   class Factory
-    attr_reader :name, :capacity, :productions
+    attr_reader :name, :capacity, :productions, :sequential
 
-    def initialize(name, capacity)
+    def initialize(name, capacity, sequential=false)
       @name = name
       @capacity = capacity
       @resources = {}
       @production_times = {}
       @productions = []
+      @sequential = sequential
     end
 
     def free_capacity
@@ -45,6 +46,12 @@ module Smcty
         raise "The resource #{resource.name} is not registered with this factory"
       end
 
+      # in case of a sequential production the time must be extended
+      # find latest end time of a preceeding production
+      if sequential && latest = @productions.sort{|x,y| y.end_time <=> x.end_time}.first
+        time += (latest.end_time - Time.now).to_i
+      end
+
       allocations.each{ |a| a.get }
       production = Production.new(resource, time)
       @productions << production
@@ -65,6 +72,7 @@ module Smcty
       {
         "name" => @name,
         "capacity" => @capacity,
+        "sequential" => @sequential,
         "resources" => @resources.values.map{|r| r.to_hash(@production_times[r])}
       }
     end

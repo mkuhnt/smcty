@@ -9,7 +9,11 @@ module Smcty
     end
 
     def finished?
-      @start_time + duration <= Time.now
+      end_time <= Time.now
+    end
+
+    def end_time
+      @start_time + duration
     end
 
     def to_s

@@ -44,6 +44,7 @@ module Smcty
     end
 
     def next
+      puts "determine the next action"
       # any project finished?
       action = project_ready
       return action if action
@@ -63,6 +64,7 @@ module Smcty
     end
 
     def project_ready
+      puts " -> is there a project ready for delivery?"
       @projects.keys.each do |project|
         ready = true
         @projects[project].each do |job|
@@ -91,6 +93,7 @@ module Smcty
     end
 
     def something_pure_to_produce
+      puts " -> is there something without dependencies to produce?"
       @projects.keys.each do |project|
         @projects[project].each do |job|
           if job.new?
@@ -106,6 +109,7 @@ module Smcty
     end
 
     def something_to_pick
+      puts " -> is there something to pick?"
       @projects.keys.each do |project|
         @projects[project].each do |job|
           if job.ready? && store.free_capacity > 0
@@ -120,6 +124,7 @@ module Smcty
     end
 
     def something_dependent_to_produce
+      puts " -> is there something with dependencies ready for production?"
       @projects.keys.each do |project|
         @projects[project].each do |job|
           if job.allocated_dependencies?
