@@ -46,14 +46,17 @@ module Smcty
         raise "The resource #{resource.name} is not registered with this factory"
       end
 
+      start_time = Time.now
+
       # in case of a sequential production the time must be extended
       # find latest end time of a preceeding production
-      if sequential && latest = @productions.sort{|x,y| y.end_time <=> x.end_time}.first
-        time += (latest.end_time - Time.now).to_i
+      running_production = @productions.select{|p| !p.finished?}
+      if sequential && latest = running_production.sort{|x,y| y.end_time <=> x.end_time}.first
+        start_time = latest.end_time
       end
 
       allocations.each{ |a| a.get }
-      production = Production.new(resource, time)
+      production = Production.new(resource, time, start_time)
       @productions << production
       production
     end

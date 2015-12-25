@@ -48,11 +48,11 @@ module Smcty
       # any project finished?
       action = project_ready
       return action if action
-      # any pure request?
-      action = something_dependent_to_produce
-      return action if action
       # anything to pickup?
       action = something_to_pick
+      return action if action
+      # any pure request?
+      action = something_dependent_to_produce
       return action if action
       # anything that can be produced?
       action = something_pure_to_produce

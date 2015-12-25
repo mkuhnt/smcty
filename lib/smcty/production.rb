@@ -17,7 +17,7 @@ module Smcty
     end
 
     def to_s
-      "Production of #{resource.name} since #{@start_time} takes #{natural_time(@duration)} (Finished: #{finished?})"
+      "Production of #{resource.name} starts #{@start_time} takes #{natural_time(@duration)} (Finished: #{finished?})"
     end
 
     def to_hash
