@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'smcty'
-puts Smcty.start(ARGV[0])
+Smcty::Planner.start(ARGV[0])
