@@ -217,7 +217,7 @@ module Smcty
       else
         factory = @configuration.factory(commands[0])
         if factory
-          list_factory(factory)
+          show_production(factory)
         else
           puts "The factory '#{commands[0]}' is not registered"
         end
